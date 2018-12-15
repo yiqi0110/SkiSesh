@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import {Route} from 'react-router-dom';
+import Callback from './Callback';
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import HomeJumbotron from "./components/home/HomeJumbotron"
@@ -23,7 +26,10 @@ class App extends Component {
 
 
     return (
+
+
       <div className="App">
+        <Route exact path='/callback' component={Callback}/>
         <Navbar />
         <HomeJumbotron />
         <Footer />
