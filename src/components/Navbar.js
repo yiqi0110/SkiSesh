@@ -13,6 +13,7 @@ function NavBar(props) {
   return (
     <nav className="navbar navbar-dark bg-primary">
       <Link className="navbar-brand" to="/">
+      <img id="spin" src="./images/doubleBlack.png" alt="SeshLogo" width="30px" height="30px"/>
         The Sesh
       </Link>
       {
