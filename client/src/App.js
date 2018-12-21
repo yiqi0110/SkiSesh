@@ -3,6 +3,10 @@ import {Route} from 'react-router-dom';
 import Callback from './Callback';
 import Background from "./bgimages/homeBackground.jpg";
 import './style/App.scss';
+import Login from "./pages/Login";
+import Navbar from "./components/Navbar";
+import HomeJumbotron from "./components/home/HomeJumbotron";
+import Footer from "./components/Footer";
 
 const styleHome = {
   backgroundImage: `url(${Background})`,
