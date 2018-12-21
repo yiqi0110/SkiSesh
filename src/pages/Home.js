@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 // import {Route} from 'react-router-dom';
 import { DateRangePicker } from 'react-dates';
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import HomeJumbotron from "../components/home/HomeJumbotron";
 import Session from "../components/Sessions";
 import "../style/App.scss";
@@ -70,7 +68,7 @@ class Home extends Component {
     render() {
         return (
             <div className="Home">
-                <Navbar />
+
                 <div className="holder d-flex justify-content-center">
                 {this.state.clicked ?
                     // put left side bar for mod here
@@ -88,7 +86,6 @@ class Home extends Component {
                             />
                     </HomeJumbotron>}
                     </div>
-                <Footer />
             </div>
         );
     }
