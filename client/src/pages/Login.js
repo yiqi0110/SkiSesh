@@ -26,7 +26,7 @@ class Login extends Component {
         });
     };
 
-    handleFormSubmit = event => {
+    handleFormSignUp = event => {
         event.preventDefault();
         if (this.state.username && this.state.password && this.state.age) {
             console.log(this.state.username)
@@ -35,11 +35,21 @@ class Login extends Component {
                 password: this.state.password,
                 age: this.state.age
             })
-                // .then(res => this.loadBooks())
-                .then(console.log(this.state.username))
                 .catch(err => console.log(err));
+            this.setState({
+                header: "Login"
+            })
         }
     };
+
+    handleLogin = event => {
+        event.preventDefault();
+        if(this.state.username && this.state.password){
+            API.getUser({
+                
+            })
+        }
+    }
 
     toggleModal = () => {
         this.setState({
@@ -88,7 +98,7 @@ class Login extends Component {
                             />
                             <FormBtn
                                 disabled={!(this.state.username && this.state.password && this.state.age)}
-                                onClick={this.handleFormSubmit}
+                                onClick={this.handleFormSignUp}
                             >
                                 Register
                         </FormBtn>
