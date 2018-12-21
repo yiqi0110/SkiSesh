@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import 'react-dates/initialize';
-import 'react-dates/lib/css/_datepicker.css';
+// import 'react-dates/initialize';
+// import 'react-dates/lib/css/_datepicker.css';
 import {Route} from 'react-router-dom';
 import Callback from './Callback';
-import Home from './pages/Home';
-import Background from "./bgimages/homeBackground.jpg";
+// import Home from './pages/Home';
+// import Background from "./bgimages/homeBackground.jpg";
 import './style/App.scss';
 import Login from "./pages/Login";
+import Navbar from "./components/Navbar";
+import HomeJumbotron from "./components/home/HomeJumbotron";
+import Footer from "./components/Footer";
 
 const styleHome = {
-  backgroundImage: `url(${Background})`,
+  // backgroundImage: `url(${Background})`,
   width: '100%',
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
@@ -30,20 +33,12 @@ class App extends Component {
 
 
     return (
-<<<<<<< HEAD:src/App.js
       <div className="App"  style={styleHome}>
-        <Route exact path='/callback' component={Callback}/>
-        <Home />
-=======
-
-
-      <div className="App">
-        {/* <Route exact path='/callback' component={Callback}/> */}
+        {/* <Home /> */}
         <Login />
         <Navbar />
         <HomeJumbotron />
         <Footer />
->>>>>>> 0da1f108ff13418dd9c02f8935385444b06e3cda:client/src/App.js
       </div>
     );
   }
