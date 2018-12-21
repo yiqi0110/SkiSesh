@@ -13,4 +13,7 @@ router
   // .put(userController.update)
   // .delete(userController.remove);
 
+router.route("/login")
+.post(userController.findUser)
+
 module.exports = router;

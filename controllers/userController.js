@@ -16,9 +16,16 @@ module.exports = {
   },
   findUser: function(req, res){
     db.User
-    .findOne({username})
+    .findOne({
+      username: req.body.username,
+      password: req.body.password
+      })
+      // .then(console.log(req.body))
+      .then(dbModel => console.log(dbModel))
+      .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
+    console.log(req.body)
     db.User
       .create(req.body)
       .then(dbModel => res.json(dbModel))

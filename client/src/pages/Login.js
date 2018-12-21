@@ -45,9 +45,14 @@ class Login extends Component {
     handleLogin = event => {
         event.preventDefault();
         if(this.state.username && this.state.password){
-            API.getUser({
-                
+            console.log(this.state.username)
+            console.log(this.state.password)
+            API.findUser({
+                username: this.state.username,
+                password: this.state.password
             })
+            // .then(console.log("success"))
+            .catch(err => console.log(err))
         }
     }
 
@@ -127,7 +132,7 @@ class Login extends Component {
                             />
                             <FormBtn
                                 disabled={!(this.state.username && this.state.password)}
-                                onClick={this.handleFormSubmit}
+                                onClick={this.handleLogin}
                             >
                                 Submit User
                         </FormBtn>
