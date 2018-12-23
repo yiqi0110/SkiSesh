@@ -1,4 +1,5 @@
 const db = require("../models");
+const bcrypt = require('bcrypt');
 
 // Defining methods for the booksController
 module.exports = {
@@ -16,12 +17,13 @@ module.exports = {
   },
   findUser: function(req, res){
     db.User
-    .findOne({
-      username: req.body.username,
-      password: req.body.password
+    .findOne({username: req.body.username}, function (err, user){
+        user.comparePassword(req.body.password, function(err, isMatch){
+          if (err) throw err;
+          console.log(req.body.password, isMatch);
+        })
       })
-      // .then(console.log(req.body))
-      .then(dbModel => console.log(dbModel))
+      .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {

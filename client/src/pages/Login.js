@@ -50,6 +50,9 @@ class Login extends Component {
             API.findUser({
                 username: this.state.username,
                 password: this.state.password
+            }, function(err, res){
+                if (err) throw err;
+                console.log(res);
             })
             // .then(console.log("success"))
             .catch(err => console.log(err))
