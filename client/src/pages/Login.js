@@ -52,7 +52,13 @@ class Login extends Component {
                 password: this.state.password
             })
                 .then(res => {
-                    console.log("res", res)
+                    console.log(res);
+                    // If the password is incorrect, res.data will be empty
+                    if (!res.data) {
+                        console.log("try again");
+                    } else {
+                        console.log("yay")
+                    }
                 })
                 .catch(err => console.log(err))
         }
@@ -74,6 +80,12 @@ class Login extends Component {
         this.setState({
             header: "Sign Up!"
         })
+    }
+
+    handleBackToLogin = () => {
+        this.setState({
+            header: "Login"
+        });
     }
 
     render() {
@@ -110,6 +122,7 @@ class Login extends Component {
                                 Register
                         </FormBtn>
                         </form>
+                        <button onClick={this.handleBackToLogin} className="btn-link" href="">Cancel</button>
                     </Modal>
                 </div>
             )
