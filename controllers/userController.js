@@ -1,27 +1,43 @@
 const db = require("../models");
-const bcrypt = require('bcrypt');
 
 // Defining methods for the booksController
 module.exports = {
-  findAll: function(req, res) {
+  findAll: function (req, res) {
     db.User
       .find(req.query)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findById: function(req, res) {
+  findById: function (req, res) {
     db.User
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  findUser: function(req, res){
+  findUser: function (req, res) {
     db.User
-    .findOne({username: req.body.username}, function (err, user){
-        user.comparePassword(req.body.password, function(err, isMatch){
+      .getAuthenticated(req.body.username, req.body.password, function (err, user, reason) {
           if (err) throw err;
-          console.log(req.body.password, isMatch);
-        })
+          if (user) {
+            // handle login success
+            console.log('login success');
+            console.log(user)
+            // return;
+        }
+
+        // otherwise we can determine why we failed
+        var reasons = db.User.failedLogin;
+        switch (reason) {
+            case reasons.NOT_FOUND:
+            case reasons.PASSWORD_INCORRECT:
+                // note: these cases are usually treated the same - don't tell
+                // the user *why* the login failed, only that it did
+                break;
+            case reasons.MAX_ATTEMPTS:
+                // send email or otherwise notify user that account is
+                // temporarily locked
+                break;
+        }
       })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));

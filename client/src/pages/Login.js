@@ -29,7 +29,7 @@ class Login extends Component {
     handleFormSignUp = event => {
         event.preventDefault();
         if (this.state.username && this.state.password && this.state.age) {
-            console.log(this.state.username)
+            console.log("Username", this.state.username)
             API.saveUser({
                 username: this.state.username,
                 password: this.state.password,
@@ -44,18 +44,18 @@ class Login extends Component {
 
     handleLogin = event => {
         event.preventDefault();
-        if(this.state.username && this.state.password){
+        if (this.state.username && this.state.password) {
             console.log(this.state.username)
             console.log(this.state.password)
             API.findUser({
                 username: this.state.username,
                 password: this.state.password
-            }, function(err, res){
+            }, function (err, res) {
                 if (err) throw err;
-                console.log(res);
+                console.log("Res", res);
             })
-            // .then(console.log("success"))
-            .catch(err => console.log(err))
+                .then(console.log("yay"))
+                .catch(err => console.log(err))
         }
     }
 
@@ -137,7 +137,7 @@ class Login extends Component {
                                 disabled={!(this.state.username && this.state.password)}
                                 onClick={this.handleLogin}
                             >
-                                Submit User
+                                Login
                         </FormBtn>
                         </form>
                         <p>Not a Member?
