@@ -70,7 +70,7 @@ class Home extends Component {
     render() {
         return (
             <div className="Home">
-                <Navbar />
+                <Navbar link="profile" />
                 <div className="holder d-flex justify-content-center">
                 {this.state.clicked ?
                     // put left side bar for mod here
