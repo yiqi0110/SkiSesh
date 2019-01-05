@@ -22,7 +22,7 @@ module.exports = {
             // handle login success
             console.log('login success');
             console.log(user)
-            // return;
+            
         }
 
         // otherwise we can determine why we failed
@@ -38,9 +38,10 @@ module.exports = {
                 // temporarily locked
                 break;
         }
+        return res.json(user);
       })
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+      // .then(dbModel => res.json(dbModel))
+      // .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
     console.log(req.body)
