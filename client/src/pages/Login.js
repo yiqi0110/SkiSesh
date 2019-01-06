@@ -57,7 +57,8 @@ class Login extends Component {
                     if (!res.data) {
                         console.log("try again");
                     } else {
-                        console.log("yay")
+                        sessionStorage.setItem("username", res.data.username);
+                        this.setState({display: "none"});
                     }
                 })
                 .catch(err => console.log(err))
