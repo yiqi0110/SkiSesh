@@ -10,15 +10,16 @@ class Login extends Component {
         age: "",
         skill: "",
         display: "none",
-        header: "Login"
+        header: "Login",
+        loginError: ""
     };
 
     componentDidMount = () => {
         let user = sessionStorage.getItem("username");
         if (user) {
-            this.setState({display: "none"})
+            this.setState({ display: "none" })
         } else {
-            this.setState({display: "block"})
+            this.setState({ display: "block" })
         }
     }
 
@@ -58,7 +59,7 @@ class Login extends Component {
                     console.log(res);
                     // If the password is incorrect, res.data will be empty
                     if (!res.data) {
-                        console.log("try again");
+                        this.setState({ loginError: true });
                     } else {
                         sessionStorage.setItem("username", res.data.username);
                         this.setState({ display: "none" });
@@ -135,6 +136,9 @@ class Login extends Component {
                 <div>
                     <Modal display={this.state.display}
                         header={this.state.header}>
+                        {this.state.loginError ? <div class="alert alert-danger" role="alert">
+                            Incorrect username or password
+                        </div> : ""}
                         <form>
                             <Input
                                 value={this.state.username}
