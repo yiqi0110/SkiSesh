@@ -1,4 +1,5 @@
 import React from 'react';
+import "../../style/Modal.scss";
 
 function Modal (props) {
     return (

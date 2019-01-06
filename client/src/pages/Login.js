@@ -83,13 +83,18 @@ class Login extends Component {
 
     handleSignUp = () => {
         this.setState({
-            header: "Sign Up!"
+            header: "Sign Up!",
+            username: "",
+            password: ""
         })
     }
 
     handleBackToLogin = () => {
         this.setState({
-            header: "Login"
+            header: "Login",
+            username: "",
+            password: "",
+            age: ""
         });
     }
 
