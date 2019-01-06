@@ -14,9 +14,12 @@ class Login extends Component {
     };
 
     componentDidMount = () => {
-        this.setState({
-            display: "block"
-        })
+        let user = sessionStorage.getItem("username");
+        if (user) {
+            this.setState({display: "none"})
+        } else {
+            this.setState({display: "block"})
+        }
     }
 
     handleInputChange = event => {
@@ -58,7 +61,7 @@ class Login extends Component {
                         console.log("try again");
                     } else {
                         sessionStorage.setItem("username", res.data.username);
-                        this.setState({display: "none"});
+                        this.setState({ display: "none" });
                     }
                 })
                 .catch(err => console.log(err))
