@@ -11,7 +11,8 @@ class Login extends Component {
         skill: "",
         display: "none",
         header: "Login",
-        loginError: ""
+        loginError: "",
+        usernameTaken: ""
     };
 
     componentDidMount = () => {
@@ -33,16 +34,28 @@ class Login extends Component {
     handleFormSignUp = event => {
         event.preventDefault();
         if (this.state.username && this.state.password && this.state.age) {
-            console.log("Username", this.state.username)
             API.saveUser({
                 username: this.state.username,
                 password: this.state.password,
                 age: this.state.age
             })
-                .catch(err => console.log(err));
-            this.setState({
-                header: "Login"
-            })
+                .then(res => {
+                    console.log(res)
+                    if (res.data.errmsg) {
+                        this.setState({
+                            usernameTaken: true,
+                            username: "",
+                            password: "",
+                            age: ""
+                        });
+                    } else {
+                        this.setState({
+                            header: "Login",
+                            username: "",
+                            password: ""
+                        });
+                    }
+                });
         }
     };
 
@@ -86,7 +99,7 @@ class Login extends Component {
             header: "Sign Up!",
             username: "",
             password: ""
-        })
+        });
     }
 
     handleBackToLogin = () => {
@@ -94,7 +107,8 @@ class Login extends Component {
             header: "Login",
             username: "",
             password: "",
-            age: ""
+            age: "",
+            usernameTaken: ""
         });
     }
 
@@ -104,6 +118,9 @@ class Login extends Component {
                 <div>
                     <Modal display={this.state.display}
                         header={this.state.header}>
+                        {this.state.usernameTaken ? <div className="alert alert-danger" role="alert">
+                            Username is already taken.
+                        </div> : ""}
                         <form>
                             <Input
                                 value={this.state.username}
@@ -141,7 +158,7 @@ class Login extends Component {
                 <div>
                     <Modal display={this.state.display}
                         header={this.state.header}>
-                        {this.state.loginError ? <div class="alert alert-danger" role="alert">
+                        {this.state.loginError ? <div className="alert alert-danger" role="alert">
                             Incorrect username or password
                         </div> : ""}
                         <form>
