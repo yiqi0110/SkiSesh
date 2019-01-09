@@ -43,7 +43,7 @@ function Sessions(props) {
                         Date Range For Your Sesh: {startDate} to {endDate}
                     </div>
                     <div className="card-body">
-                        <h5 className="card-title">{props.comments ? "Dang. . . Look At All Those Comments!" : <a href="http://shredsauce.com/" target="_blank" rel="noopener noreferrer">No Comments? No Worries, Just Play Shredsauce While You Wait</a>}</h5>
+                        <h5 className="card-title">{props.comments ? "Dang. . . Look At All Those Comments!" : <a href="http://shredsauce.com/" target="_blank" rel="noopener noreferrer">No Comments? No Worries, Just Play Shredsauce While You Wait. But Only IF You Have Firefox.</a>}</h5>
                         <div className="card-text">
                             <li>Time Of Day: {props.timeOfDay}</li>
                             <li>Skill Preference: <img src={props.difficulty} alt={props.difficulty} width="35rem" /></li>

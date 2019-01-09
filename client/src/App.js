@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import {Route} from 'react-router-dom';
-import Callback from './Callback';
+// import {Route} from 'react-router-dom';
+// import Callback from './Callback';
 import Background from "./bgimages/homeBackground.jpg";
 import './style/App.scss';
 import Login from "./pages/Login";
-import Navbar from "./components/Navbar";
-import HomeJumbotron from "./components/home/HomeJumbotron";
+import Profile from "./pages/Profile";
+import Home from "./pages/Home";
 import Footer from "./components/Footer";
+import 'react-dates/lib/css/_datepicker.css';
+import 'react-dates/initialize';
 
 const styleHome = {
   backgroundImage: `url(${Background})`,
@@ -19,27 +21,37 @@ const styleHome = {
 
 class App extends Component {
 
-  // Create if statement for 'page' to conditionally render "login", "home", and "profile".
-
-
-  // make if for make sesh vs find sesh
-  handleCollapseClick = (e) => {
-      console.log(e.target);
+  state = {
+    pageON: "profile",   // just "home" for now (tesing purposes)
   }
 
   render() {
 
-
-    return (
-      <div className="App"  style={styleHome}>
-
-        {/* <Home /> */}
+    if (this.state.pageON === "login") {
+      return (
+        <div className="App"  style={styleHome}>
         <Login />
-        <Navbar />
-        <HomeJumbotron />
         <Footer />
       </div>
-    );
+      );
+
+    } else if (this.state.pageON === "home") {
+      return (
+        <div className="App"  style={styleHome}>
+          <Home />
+        </div>
+      );
+      
+    } else if (this.state.pageON === "profile") {
+      return (
+        <div className="App"  style={styleHome}>
+          <Profile />
+        </div>
+      );
+
+    } else {
+      console.log("sorry no page loaded");
+    }
   }
 }
 

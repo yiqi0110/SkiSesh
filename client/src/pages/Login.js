@@ -9,8 +9,9 @@ class Login extends Component {
         password: "",
         age: "",
         skill: "",
-        display: "none",
-        header: "Login"
+        display: "block",
+        header: "Login",
+        pageON: "login"
     };
 
     componentDidMount = () => {
@@ -37,7 +38,8 @@ class Login extends Component {
             })
                 .catch(err => console.log(err));
             this.setState({
-                header: "Login"
+                header: "Login",
+                pageON: "home",
             })
         }
     };

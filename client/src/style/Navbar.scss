@@ -1,9 +1,19 @@
 $textColor : #e4e4e4;
 
-.navbar-dark {
+.navContainer {
     padding: 15px;
     background-color: #777777;
     width: 100%;
+    button.link2homeORprofile {
+        color: #e4e4e4;
+    }
+    button.link2homeORprofile:hover {
+        padding: 7px;
+        background-color: #a3a2a2;
+        text-decoration: none;
+        font-size: 110%;
+        opacity: .7;
+    }
     .logoAndName {
         color: $textColor;
         font-size: 20px;
