@@ -140,7 +140,7 @@ class Login extends Component {
                             <Input
                                 value={this.state.age}
                                 onChange={this.handleInputChange}
-                                type="number"
+                                type="date"
                                 name="age"
                                 placeholder="Age"
                             />
