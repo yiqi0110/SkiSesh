@@ -12,8 +12,7 @@ class Login extends Component {
         display: "none",
         header: "Login",
         loginError: "",
-        usernameTaken: ""
-        pageON: "login"
+        usernameTaken: "",
     };
 
     componentDidMount = () => {
@@ -76,7 +75,8 @@ class Login extends Component {
                         this.setState({ loginError: true });
                     } else {
                         sessionStorage.setItem("username", res.data.username);
-                        this.setState({ display: "none" });
+                        this.setState({ display: "none"});
+                        this.props.pageON();
                     }
                 })
                 .catch(err => console.log(err))

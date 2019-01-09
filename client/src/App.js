@@ -21,15 +21,28 @@ const styleHome = {
 class App extends Component {
 
   state = {
-    pageON: "profile",   // just "home" for now (tesing purposes)
+    pageON: "login",   // just "home" for now (tesing purposes)
   }
+
+  onChangeLogin = () => {
+    this.setState({pageON: "login"})
+  }
+
+  onChangeHome = () => {
+    this.setState({pageON: "home"})
+  }
+
+  onChangeProfile = () => {
+    this.setState({pageON: "profile"})
+  }
+
 
   render() {
 
     if (this.state.pageON === "login") {
       return (
         <div className="App"  style={styleHome}>
-        <Login />
+        <Login pageON={this.onChangeHome.bind(this)}/>
         <Footer />
       </div>
       );
