@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Navbar, NavbarBrand, NavbarNav, NavItem, NavbarToggler, Collapse, FormInline } from "mdbreact";
-import auth0Client from '../Auth';
 import "../style/Navbar.scss"
 
 class NavBar extends Component {
@@ -14,12 +13,6 @@ class NavBar extends Component {
   };
 
   toggleCollapse = this.setState({ isOpen: !this.state.isOpen });
-
-  signOut = () => {
-    auth0Client.signOut();
-    this.state.history.replace('/');
-  };
-
 
   render () {
 
@@ -49,17 +42,7 @@ class NavBar extends Component {
           <NavbarNav right>
             <NavItem>
               <FormInline waves>
-                {
-                  !auth0Client.isAuthenticated() &&
-                  <button className="btn btn-dark" onClick={auth0Client.signIn}>Sign In</button>
-                }
-                {
-                  auth0Client.isAuthenticated() &&
-                  <div>
-                    <label className="mr-2 text-white">{auth0Client.getProfile().name}</label>
                     {/* <button className="btn btn-dark" onClick={() => { signOut() }}>Sign Out</button> */}
-                  </div>
-                }
               </FormInline>
             </NavItem>
           </NavbarNav>

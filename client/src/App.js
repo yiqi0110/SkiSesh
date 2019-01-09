@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-// import {Route} from 'react-router-dom';
-// import Callback from './Callback';
+import {Route} from 'react-router-dom';
 import Background from "./bgimages/homeBackground.jpg";
 import './style/App.scss';
 import Login from "./pages/Login";

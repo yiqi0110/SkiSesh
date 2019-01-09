@@ -9,15 +9,20 @@ class Login extends Component {
         password: "",
         age: "",
         skill: "",
-        display: "block",
+        display: "none",
         header: "Login",
+        loginError: "",
+        usernameTaken: ""
         pageON: "login"
     };
 
     componentDidMount = () => {
-        this.setState({
-            display: "block"
-        })
+        let user = sessionStorage.getItem("username");
+        if (user) {
+            this.setState({ display: "none" })
+        } else {
+            this.setState({ display: "block" })
+        }
     }
 
     handleInputChange = event => {
@@ -30,31 +35,51 @@ class Login extends Component {
     handleFormSignUp = event => {
         event.preventDefault();
         if (this.state.username && this.state.password && this.state.age) {
-            console.log(this.state.username)
             API.saveUser({
                 username: this.state.username,
                 password: this.state.password,
                 age: this.state.age
             })
-                .catch(err => console.log(err));
-            this.setState({
-                header: "Login",
-                pageON: "home",
-            })
+                .then(res => {
+                    console.log(res)
+                    if (res.data.errmsg) {
+                        this.setState({
+                            usernameTaken: true,
+                            username: "",
+                            password: "",
+                            age: ""
+                        });
+                    } else {
+                        this.setState({
+                            header: "Login",
+                            username: "",
+                            password: ""
+                        });
+                    }
+                });
         }
     };
 
     handleLogin = event => {
         event.preventDefault();
-        if(this.state.username && this.state.password){
+        if (this.state.username && this.state.password) {
             console.log(this.state.username)
             console.log(this.state.password)
             API.findUser({
                 username: this.state.username,
                 password: this.state.password
             })
-            // .then(console.log("success"))
-            .catch(err => console.log(err))
+                .then(res => {
+                    console.log(res);
+                    // If the password is incorrect, res.data will be empty
+                    if (!res.data) {
+                        this.setState({ loginError: true });
+                    } else {
+                        sessionStorage.setItem("username", res.data.username);
+                        this.setState({ display: "none" });
+                    }
+                })
+                .catch(err => console.log(err))
         }
     }
 
@@ -72,8 +97,21 @@ class Login extends Component {
 
     handleSignUp = () => {
         this.setState({
-            header: "Sign Up!"
-        })
+            header: "Sign Up!",
+            username: "",
+            password: "",
+            loginError: ""
+        });
+    }
+
+    handleBackToLogin = () => {
+        this.setState({
+            header: "Login",
+            username: "",
+            password: "",
+            age: "",
+            usernameTaken: ""
+        });
     }
 
     render() {
@@ -82,6 +120,9 @@ class Login extends Component {
                 <div>
                     <Modal display={this.state.display}
                         header={this.state.header}>
+                        {this.state.usernameTaken ? <div className="alert alert-danger" role="alert">
+                            Username is already taken.
+                        </div> : ""}
                         <form>
                             <Input
                                 value={this.state.username}
@@ -110,6 +151,7 @@ class Login extends Component {
                                 Register
                         </FormBtn>
                         </form>
+                        <button onClick={this.handleBackToLogin} className="btn-link" href="">Cancel</button>
                     </Modal>
                 </div>
             )
@@ -118,6 +160,9 @@ class Login extends Component {
                 <div>
                     <Modal display={this.state.display}
                         header={this.state.header}>
+                        {this.state.loginError ? <div className="alert alert-danger" role="alert">
+                            Incorrect username or password
+                        </div> : ""}
                         <form>
                             <Input
                                 value={this.state.username}
@@ -136,7 +181,7 @@ class Login extends Component {
                                 disabled={!(this.state.username && this.state.password)}
                                 onClick={this.handleLogin}
                             >
-                                Submit User
+                                Login
                         </FormBtn>
                         </form>
                         <p>Not a Member?
