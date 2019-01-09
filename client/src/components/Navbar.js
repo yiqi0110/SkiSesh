@@ -11,6 +11,7 @@ function NavBar(props) {
       <img id="spin" src="./images/doubleBlack.png" alt="SeshLogo" width="30px" height="30px"/>
         The Sesh
       </Link>
+      <div>{props.logout} handleClick={props.handleLogout}</div>
     </nav>
   );
 }

@@ -98,7 +98,8 @@ class Login extends Component {
         this.setState({
             header: "Sign Up!",
             username: "",
-            password: ""
+            password: "",
+            loginError: ""
         });
     }
 
