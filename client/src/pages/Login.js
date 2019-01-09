@@ -13,6 +13,7 @@ class Login extends Component {
         header: "Login",
         loginError: "",
         usernameTaken: ""
+        pageON: "login"
     };
 
     componentDidMount = () => {

@@ -1,4 +1,5 @@
 import React from "react";
+import "../../style/Jumbotron.scss";
 import CollapseForm from "./CollapseForm";
 
 function HomeJumbotron(props) {
