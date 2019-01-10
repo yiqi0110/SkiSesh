@@ -8,5 +8,8 @@ export default {
   // Saves a user to the database
   saveUser: function (userData) {
     return axios.post("/api/users", userData);
+  },
+  postSesh: function(seshData){
+    return axios.post("/api/sesh", seshData)
   }
 };
