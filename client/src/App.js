@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Background from "./bgimages/homeBackground.jpg";
 import './style/App.scss';
 import Login from "./pages/Login";
@@ -24,16 +24,25 @@ class App extends Component {
     pageON: "login",   // just "home" for now (tesing purposes)
   }
 
+  componentDidMount() {
+    let user = sessionStorage.getItem("username");
+    if (user) {
+      this.setState({ pageON: "home" });
+    } else {
+      this.setState({ pageON: "login" });
+    }
+  }
+
   onChangeLogin = () => {
-    this.setState({pageON: "login"})
+    this.setState({ pageON: "login" })
   }
 
   onChangeHome = () => {
-    this.setState({pageON: "home"})
+    this.setState({ pageON: "home" })
   }
 
   onChangeProfile = () => {
-    this.setState({pageON: "profile"})
+    this.setState({ pageON: "profile" })
   }
 
 
@@ -41,22 +50,22 @@ class App extends Component {
 
     if (this.state.pageON === "login") {
       return (
-        <div className="App"  style={styleHome}>
-        <Login pageON={this.onChangeHome.bind(this)}/>
-        <Footer />
-      </div>
+        <div className="App" style={styleHome}>
+          <Login pageON={this.onChangeHome.bind(this)} />
+          <Footer />
+        </div>
       );
 
     } else if (this.state.pageON === "home") {
       return (
-        <div className="App"  style={styleHome}>
+        <div className="App" style={styleHome}>
           <Home />
         </div>
       );
-      
+
     } else if (this.state.pageON === "profile") {
       return (
-        <div className="App"  style={styleHome}>
+        <div className="App" style={styleHome}>
           <Profile />
         </div>
       );

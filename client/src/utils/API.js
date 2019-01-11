@@ -10,6 +10,9 @@ export default {
     return axios.post("/api/users", userData);
   },
   postSesh: function(seshData){
-    return axios.post("/api/sesh", seshData)
+    return axios.post("/api/sesh", seshData);
+  },
+  getResorts: function(){
+    return axios.get("/api/resorts");
   }
 };

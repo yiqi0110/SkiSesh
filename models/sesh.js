@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const seshSchema = new Schema({
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },
-  time: {type: String, require: true},
+  resort: {type: String, require: true},
   skill: {type: String, require: true}
 });
 

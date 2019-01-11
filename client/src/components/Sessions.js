@@ -9,14 +9,6 @@ function Sessions(props) {
     let startDate = JSON.stringify(props.startDate._d).slice(1, 10);
     let endDate = JSON.stringify(props.endDate._d).slice(1, 10);
 
-    // handlePostSesh = event => {
-    //     event.preventDefault();
-    //     API.postSesh({
-            
-    //     })
-    // }
-
-
     return (
         <div className="sessionsContainer d-flex justify-content-center">
             {props.sesh ?

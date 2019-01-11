@@ -8,6 +8,7 @@ import Session from "../components/Sessions";
 import API from "../utils/API";
 import "../style/App.scss";
 import "../style/Jumbotron.scss";
+import axios from "axios";
 
 
 class Home extends Component {
@@ -23,6 +24,10 @@ class Home extends Component {
         clicked: false,
         makeSesh: false,
         jumboSink: null,
+    }
+
+    componentDidMount() {
+        this.handleResorts();
     }
 
     handleDelay () {
@@ -74,6 +79,12 @@ class Home extends Component {
             endDate: this.state.endDate,
             time: this.state.timeOfDay,
             skill: this.state.difficulty
+        })
+    }
+
+    handleResorts = () => {
+        API.getResorts({}).then(res => {
+            console.log(res)
         })
     }
 

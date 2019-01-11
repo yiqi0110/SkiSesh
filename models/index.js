@@ -1,4 +1,5 @@
 module.exports = {
     User: require("./user"),
-    Sesh: require("./sesh")
+    Sesh: require("./sesh"),
+    Resort: require("./resorts")
 }
