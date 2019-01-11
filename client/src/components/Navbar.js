@@ -9,13 +9,16 @@ class NavBar extends Component {
   state = {
     isOpen: false,
     history: "",
-    pageON: ""
   };
 
+  
   toggleCollapse = this.setState({ isOpen: !this.state.isOpen });
+  
+  onClick(topage) {
+    this.props.toPage(topage);
+  }
 
   render () {
-
     return (
     <div className="navContainer">
 
@@ -36,7 +39,7 @@ class NavBar extends Component {
         >
           <NavbarNav left>
             <NavItem active>
-              <button className="link2homeORprofile btn btn-link" onClick={() => {console.log("clicked")}} >{this.state.pageOn === "home" ? "Profile" : "Home"}</button>
+              <button className="link2homeORprofile btn btn-link" onClick={() => {this.props.link === "to profile" ? this.onClick("profile") : this.onClick("home") } }>{this.props.link === "to profile" ? "Profile" : "Home"}</button>
             </NavItem>
           </NavbarNav>
           <NavbarNav right>

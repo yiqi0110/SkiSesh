@@ -14,7 +14,7 @@ class Profile extends Component {
     render () {
         return (
             <div className="profileHolder">
-            <Navbar link="home"/>
+            <Navbar link="to home" toPage={this.props.toPage}/>
             <Edit />
             <Footer />
             </div>
