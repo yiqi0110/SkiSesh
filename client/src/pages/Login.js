@@ -76,7 +76,7 @@ class Login extends Component {
                     } else {
                         sessionStorage.setItem("username", res.data.username);
                         this.setState({ display: "none"});
-                        this.props.pageON();
+                        this.props.toHome("home");
                     }
                 })
                 .catch(err => console.log(err))

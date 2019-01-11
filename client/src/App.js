@@ -24,25 +24,25 @@ class App extends Component {
     pageON: "login",   // just "home" for now (tesing purposes)
   }
 
-  onChangeLogin = () => {
-    this.setState({pageON: "login"})
+  componentDidMount() {
+    let user = sessionStorage.getItem("username");
+    if (user) {
+      this.setState({pageON: "home"});
+    } else {
+      this.setState({pageON: "login"});
+    }
   }
 
-  onChangeHome = () => {
-    this.setState({pageON: "home"})
+  onChangeOfPage(pageToGoTo) {
+    this.setState({pageON: pageToGoTo});
   }
-
-  onChangeProfile = () => {
-    this.setState({pageON: "profile"})
-  }
-
 
   render() {
 
     if (this.state.pageON === "login") {
       return (
         <div className="App"  style={styleHome}>
-        <Login pageON={this.onChangeHome.bind(this)}/>
+        <Login toHome={this.onChangeOfPage.bind(this)}/>
         <Footer />
       </div>
       );
@@ -50,14 +50,14 @@ class App extends Component {
     } else if (this.state.pageON === "home") {
       return (
         <div className="App"  style={styleHome}>
-          <Home />
+          <Home toPage={this.onChangeOfPage.bind(this)}/>
         </div>
       );
       
     } else if (this.state.pageON === "profile") {
       return (
         <div className="App"  style={styleHome}>
-          <Profile />
+          <Profile toPage={this.onChangeOfPage.bind(this)}/>
         </div>
       );
 
