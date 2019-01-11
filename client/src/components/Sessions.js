@@ -1,5 +1,6 @@
 import React from "react";
 import "../style/Jumbotron.scss";
+import API from "../utils/API";
 
 
 function Sessions(props) {
@@ -7,7 +8,6 @@ function Sessions(props) {
 
     let startDate = JSON.stringify(props.startDate._d).slice(1, 10);
     let endDate = JSON.stringify(props.endDate._d).slice(1, 10);
-
 
     return (
         <div className="sessionsContainer d-flex justify-content-center">

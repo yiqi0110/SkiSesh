@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Background from "./bgimages/homeBackground.jpg";
 import './style/App.scss';
 import Login from "./pages/Login";
@@ -53,7 +53,7 @@ class App extends Component {
           <Home toPage={this.onChangeOfPage.bind(this)}/>
         </div>
       );
-      
+
     } else if (this.state.pageON === "profile") {
       return (
         <div className="App"  style={styleHome}>

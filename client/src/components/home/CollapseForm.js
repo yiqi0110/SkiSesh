@@ -1,4 +1,5 @@
 import React from "react";
+import {Input} from "../Form";
 
 import "../../style/Collapse.scss";
 // import { url } from "inspector";
@@ -48,12 +49,11 @@ function CollapseForm(props) {
                     </div>
                 </div>
                 <div className="input-group mb-3">
-                    <label className="input-group-text">Time Of Day You Would Like To Sesh</label>
-                    <select className="input-group-prepend" id="timeOfDay" onChange={props.handleChange}>
-                        <option value="All Day">All day</option>
-                        <option value="Early Morning">Early Morning</option>
-                        <option value="AfterNoon">AfterNoon</option>
-                    </select>
+                    <label className="input-group-text">Resort You'll Be At</label>
+                    <input type="text" list="data" onChange={props.handleChange} />
+            <datalist id="resort-list">
+                {props.resorts}
+            </datalist>
                 </div>
                 <div className="input-group mb-3">
                     <label className="input-group-text">Select the skill level that you'd like to ride with.</label>

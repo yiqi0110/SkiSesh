@@ -5,8 +5,10 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import HomeJumbotron from "../components/home/HomeJumbotron";
 import Session from "../components/Sessions";
+import API from "../utils/API";
 import "../style/App.scss";
 import "../style/Jumbotron.scss";
+import axios from "axios";
 
 
 class Home extends Component {
@@ -24,6 +26,10 @@ class Home extends Component {
         jumboSink: null,
     }
 
+    componentDidMount() {
+        this.handleResorts();
+    }
+
     handleDelay () {
         setTimeout(
             function() {
@@ -39,11 +45,12 @@ class Home extends Component {
             return;
         }
         if (btnID === "makeSesh") {
-            // GET here
+            // POST here
             this.handleDelay();
             this.setState({ jumboSink: "jumboSink 2s ease-out" });
+            this.handlePostSesh();
         } else if (btnID === "findSesh") {
-            // POST here
+            // GET here
             this.handleDelay();
             this.setState({ makeSesh: true, jumboSink: "jumboSink 2s ease-out"});
             console.log(this.state.startDate._d);  // brings back the first date
@@ -65,7 +72,21 @@ class Home extends Component {
         }
     }
 
+    handlePostSesh = () => {
+        // event.preventDefault();
+        API.postSesh({
+            startDate: this.state.startDate,
+            endDate: this.state.endDate,
+            time: this.state.timeOfDay,
+            skill: this.state.difficulty
+        })
+    }
 
+    handleResorts = () => {
+        API.getResorts({}).then(res => {
+            console.log(res)
+        })
+    }
 
     render() {
         return (
