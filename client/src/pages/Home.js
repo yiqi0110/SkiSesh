@@ -22,7 +22,8 @@ class Home extends Component {
         clicked: false,
         makeSesh: false,
         jumboSink: null,
-        resorts: []
+        resorts: [],
+        resort: ""
     }
 
     componentDidMount() {
@@ -62,8 +63,8 @@ class Home extends Component {
     handleChange = (e) => {
         console.log(typeof e.target.id);
         console.log(e.target.value);
-        if (e.target.id === "timeOfDay") {
-            this.setState({ timeOfDay: e.target.value })
+        if (e.target.id === "resort-datalist") {
+            this.setState({ resort: e.target.value })
         } else if (e.target.id === "experienceLevel") {
             this.setState({ difficulty: e.target.value })
         } else {
@@ -76,7 +77,7 @@ class Home extends Component {
         API.postSesh({
             startDate: this.state.startDate,
             endDate: this.state.endDate,
-            time: this.state.timeOfDay,
+            resort: this.state.resort,
             skill: this.state.difficulty
         })
     }
