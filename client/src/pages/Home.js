@@ -23,11 +23,13 @@ class Home extends Component {
         jumboSink: null,
         resorts: [],
         makeOrFind: "",
-        resort: ""
+        resort: "",
+        username: ""
     }
 
     componentDidMount() {
         this.handleResorts();
+        this.getUsername();
     }
 
     handleDelay() {
@@ -49,18 +51,24 @@ class Home extends Component {
             // POST here
             // this.handleDelay();
             // this.setState({ jumboSink: "jumboSink 2s ease-out", makeOrFind: "make" });
-            this.setState({ makeSesh:true, makeOrFind: "make" });
+            this.setState({ makeSesh: true, makeOrFind: "make" });
         } else if (btnID === "findSesh") {
             // GET here
             // this.handleDelay();
             // this.setState({ makeSesh: true, jumboSink: "jumboSink 2s ease-out", makeOrFind: "find" });
             this.setState({ makeSesh: true, makeOrFind: "find" });
             // console.log(this.state.startDate._d);  // brings back the first date
-        } else if (btnID === "post-sesh"){
+        } else if (btnID === "post-sesh") {
+            if ((this.state.startDate === null || this.state.endDate === null) || (this.state.resort === "")) {
+                return;
+            }
             this.handlePostSesh();
             this.handleDelay();
             this.setState({ jumboSink: "jumboSink 2s ease-out" });
-        } else if (btnID === "get-sesh"){
+        } else if (btnID === "get-sesh") {
+            if ((this.state.startDate === null || this.state.endDate === null) || (this.state.resort === "")) {
+                return;
+            }
             this.handleFindSesh();
             this.handleDelay();
             this.setState({ jumboSink: "jumboSink 2s ease-out" });
@@ -88,7 +96,8 @@ class Home extends Component {
             startDate: this.state.startDate,
             endDate: this.state.endDate,
             resort: this.state.resort,
-            skill: this.state.difficulty
+            skill: this.state.difficulty,
+            username: this.state.username
         })
     }
 
@@ -112,8 +121,13 @@ class Home extends Component {
             for (const key of entries) {
                 resortArr.push(key[1].SkiArea.name);
             }
-            this.setState({ resorts: resortArr})
+            this.setState({ resorts: resortArr })
         })
+    }
+
+    getUsername = () => {
+        let user = sessionStorage.getItem('username');
+        this.setState({username: user});
     }
 
     render() {
