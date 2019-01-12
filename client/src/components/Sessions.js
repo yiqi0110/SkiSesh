@@ -6,8 +6,8 @@ import API from "../utils/API";
 function Sessions(props) {
     console.log(props);
 
-    let startDate = JSON.stringify(props.startDate._d).slice(1, 10);
-    let endDate = JSON.stringify(props.endDate._d).slice(1, 10);
+    let startDate = JSON.stringify(props.startDate._d).slice(1, 11);
+    let endDate = JSON.stringify(props.endDate._d).slice(1, 11);
 
     return (
         <div className="sessionsContainer d-flex justify-content-center">

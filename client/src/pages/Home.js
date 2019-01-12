@@ -18,11 +18,11 @@ class Home extends Component {
         endDateId: "lastDay",
         focusedInput: null,
         difficulty: "./images/green.png",
-        timeOfDay: "All Day",
         clicked: false,
         makeSesh: false,
         jumboSink: null,
         resorts: [],
+        makeOrFind: "",
         resort: ""
     }
 
@@ -41,19 +41,21 @@ class Home extends Component {
 
     handleClick = (e) => {
         const btnID = e.target.id;
-        if (this.state.startDate === null || this.state.endDate === null) {
-            return;
-        }
+        console.log(btnID)
+        // if (this.state.startDate === null || this.state.endDate === null) {
+        //     return;
+        // }
         if (btnID === "makeSesh") {
             // POST here
-            this.handleDelay();
-            this.setState({ jumboSink: "jumboSink 2s ease-out" });
-            this.handlePostSesh();
+            // this.handleDelay();
+            // this.setState({ jumboSink: "jumboSink 2s ease-out", makeOrFind: "make" });
+            this.setState({ makeSesh:true, makeOrFind: "make" });
         } else if (btnID === "findSesh") {
             // GET here
-            this.handleDelay();
-            this.setState({ makeSesh: true, jumboSink: "jumboSink 2s ease-out" });
-            console.log(this.state.startDate._d);  // brings back the first date
+            // this.handleDelay();
+            // this.setState({ makeSesh: true, jumboSink: "jumboSink 2s ease-out", makeOrFind: "find" });
+            this.setState({ makeSesh: true, makeOrFind: "find" });
+            // console.log(this.state.startDate._d);  // brings back the first date
         }
         else {
             return console.log("no button is clicked");
@@ -80,43 +82,22 @@ class Home extends Component {
             resort: this.state.resort,
             skill: this.state.difficulty
         })
+        // this.handleDelay();
+        // this.setState({ jumboSink: "jumboSink 2s ease-out" });
     }
 
     handleResorts = () => {
         API.getResorts({}).then(res => {
             const resortData = (res.data);
             let resortArr = [];
-            // console.log(resortData);
-
-            // this.setState({resorts:[...this.state.resorts, resortData[0]]});
-            // console.log(this.state.resorts);
             const entries = Object.entries(resortData[0]);
             entries.pop();
             // console.log(entries);
             for (const key of entries) {
                 resortArr.push(key[1].SkiArea.name);
             }
-            // resortArr.pop();
-            // console.log(resortArr);
-            // {
-            //     resortArr.map(item =>
-            //         this.setState({
-            //             resorts: <option value={item.name}></option>
-            //         })
-            //     )
-            // }
-            // resortArr.map((element) => {
-            //     // <option value={element}></option>
-            //     console.log(element)
-            // })
             this.setState({ resorts: resortArr})
 
-            // console.log(this.state.resorts)
-            // for(var i = 0; i < (resortArr.length -1); i++){
-            //     // console.log(resortArr[i].name);
-            //     this.setState({resorts:[...this.state.resorts, resortArr[i].name]})
-            // }
-            // console.log(this.state.resorts);
         })
     }
 
@@ -129,7 +110,7 @@ class Home extends Component {
                         // put left side bar for mod here
                         <Session sesh={this.state.makeSesh} startDate={this.state.startDate} endDate={this.state.endDate} difficulty={this.state.difficulty} timeOfDay={this.state.timeOfDay} />
                         :
-                        <HomeJumbotron jumboSink={this.state.jumboSink} handleChange={this.handleChange} handleClick={this.handleClick} resorts={this.state.resorts}>
+                        <HomeJumbotron postSesh={this.handlePostSesh} makeOrFind={this.state.makeOrFind} jumboSink={this.state.jumboSink} handleChange={this.handleChange} handleClick={this.handleClick} resorts={this.state.resorts} makeSesh={this.state.makeSesh}>
                             <DateRangePicker
                                 startDate={this.state.startDate} // momentPropTypes.momentObj or null,
                                 startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
