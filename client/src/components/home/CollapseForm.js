@@ -90,7 +90,7 @@ function CollapseForm(props) {
                             )}
                         </datalist>
                     </div>
-                    <input id="findSesh" className="btn btn-primary" type="button" value="Find a Sesh"></input>
+                    <input id="get-sesh" className="btn btn-primary" type="button" value="Find a Sesh" onClick={props.handleClick}></input>
                 </form>
             </div>
         )
