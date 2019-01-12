@@ -86,18 +86,27 @@ class Home extends Component {
         // this.setState({ jumboSink: "jumboSink 2s ease-out" });
     }
 
+    handleFindSesh = () => {
+        API.findSesh({
+            startDate: this.state.startDate,
+            endDate: this.state.endDate,
+            resort: this.state.resort
+        }).then(res => {
+            console.log(res);
+        })
+    }
+
+
     handleResorts = () => {
         API.getResorts({}).then(res => {
             const resortData = (res.data);
             let resortArr = [];
             const entries = Object.entries(resortData[0]);
             entries.pop();
-            // console.log(entries);
             for (const key of entries) {
                 resortArr.push(key[1].SkiArea.name);
             }
             this.setState({ resorts: resortArr})
-
         })
     }
 
@@ -108,7 +117,7 @@ class Home extends Component {
                 <div className="holder d-flex justify-content-center">
                     {this.state.clicked ?
                         // put left side bar for mod here
-                        <Session sesh={this.state.makeSesh} startDate={this.state.startDate} endDate={this.state.endDate} difficulty={this.state.difficulty} timeOfDay={this.state.timeOfDay} />
+                        <Session sesh={this.state.makeSesh} startDate={this.state.startDate} endDate={this.state.endDate} difficulty={this.state.difficulty} resort={this.state.resort} />
                         :
                         <HomeJumbotron postSesh={this.handlePostSesh} makeOrFind={this.state.makeOrFind} jumboSink={this.state.jumboSink} handleChange={this.handleChange} handleClick={this.handleClick} resorts={this.state.resorts} makeSesh={this.state.makeSesh}>
                             <DateRangePicker
