@@ -37,38 +37,66 @@ const difficulty = [
 ];
 
 function CollapseForm(props) {
-    
-    return (
-        <div className="collapseContainer d-flex justify-content-center">
-            <form>
-                <div className="input-group mb-3">
-                    <span className="input-group-text">Date Range You Would Like To Sesh (MM/DD/YYYY)</span>
-                    <div className="input-group-prepend">
-                        {props.datePickerHelper}
+
+    if (props.makeOrFind === "make") {
+        
+        return (
+            <div className="collapseContainer d-flex justify-content-center">
+                <form>
+                    <div className="input-group mb-3">
+                        <span className="input-group-text">Date Range You Would Like To Sesh (MM/DD/YYYY)</span>
+                        <div className="input-group-prepend">
+                            {props.datePickerHelper}
+                        </div>
                     </div>
-                </div>
-                <div className="input-group mb-3">
-                    <label className="input-group-text">Resort You Would Like To Sesh</label>
-                    <input type="text" list="resorts" id="resort-datalist" onChange={props.handleChange}/>
-                    <datalist id="resorts">
-                        {props.resorts.map((element) => 
-                        <option value={element}></option>
-                        )}
-                    </datalist>
-                </div>
-                <div className="input-group mb-3">
-                    <label className="input-group-text">Select the skill level that you'd like to ride with.</label>
-                    <select className="input-group-prepend" id="experienceLevel" onChange={props.handleChange}>
-                        {difficulty.map((diff) =>
-                            <option value={diff.URL} key={diff.title}>{diff.title}</option>
-                        )}
-                    </select>
-                </div>
-                <input id="makeSesh" className="btn btn-primary" type="button" onClick={props.handleClick} value="Make a Sesh"></input>
-                <input id="findSesh" className="btn btn-primary" type="button" onClick={props.handleClick} value="Find a Sesh"></input>
-            </form>
-        </div>
-    )
+                    <div className="input-group mb-3">
+                        <label className="input-group-text">Resort You Would Like To Sesh</label>
+                        <input type="text" className="input-group-prepend" list="resorts" id="resort-datalist" onChange={props.handleChange}/>
+                        <datalist id="resorts">
+                            {props.resorts.map((element) => 
+                            <option value={element}></option>
+                            )}
+                        </datalist>
+                    </div>
+                    <div className="input-group mb-3">
+                        <label className="input-group-text">Select the skill level that you'd like to ride with.</label>
+                        <select className="input-group-prepend" id="experienceLevel" onChange={props.handleChange}>
+                            {difficulty.map((diff) =>
+                                <option value={diff.URL} key={diff.title}>{diff.title}</option>
+                            )}
+                        </select>
+                    </div>
+                    <input className="btn btn-primary" type="button" value="Make a Sesh" onClick={props.postSesh()}></input>
+                </form>
+            </div>
+        )
+    } else if (props.makeOrFind === "find") {
+
+        return (
+            <div className="collapseContainer d-flex justify-content-center">
+                <form>
+                    <div className="input-group mb-3">
+                        <span className="input-group-text">Date Range You Would Like To Sesh (MM/DD/YYYY)</span>
+                        <div className="input-group-prepend">
+                            {props.datePickerHelper}
+                        </div>
+                    </div>
+                    <div className="input-group mb-3">
+                        <label className="input-group-text">Resort You Would Like To Sesh</label>
+                        <input type="text" className="input-group-prepend" list="resorts" id="resort-datalist" onChange={props.handleChange}/>
+                        <datalist id="resorts">
+                            {props.resorts.map((element) => 
+                            <option value={element}></option>
+                            )}
+                        </datalist>
+                    </div>
+                    <input id="findSesh" className="btn btn-primary" type="button" value="Find a Sesh"></input>
+                </form>
+            </div>
+        )
+
+    }
+    
 }
 
 export default CollapseForm;

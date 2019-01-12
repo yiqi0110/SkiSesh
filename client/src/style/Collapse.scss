@@ -1,18 +1,21 @@
 .collapseContainer {
-    .input-group-text {
-        width: 100%;
-    }
-    .input-group-prepend {
-        width: 100%;
-    }
-    .DateRangePicker {
-        width: 100%;
-        .DateRangePickerInput {
+    form{
+        width: 90%;
+        .input-group-text {
             width: 100%;
         }
-    }
-    .btn {
-        margin: 1rem 1rem;
+        .input-group-prepend {
+            width: 100%;
+        }
+        .DateRangePicker {
+            width: 100%;
+            .DateRangePickerInput {
+                width: 100%;
+            }
+        }
+        .btn {
+            margin: 1rem 1rem;
+        }
     }
 }
 
