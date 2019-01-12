@@ -14,8 +14,9 @@ class NavBar extends Component {
   
   toggleCollapse = this.setState({ isOpen: !this.state.isOpen });
   
-  onClick(topage) {
-    this.props.toPage(topage);
+  onClick = (e) => {
+    e.preventDefault();
+    this.props.toPage(e.target.id);
   }
 
   render () {
@@ -39,7 +40,8 @@ class NavBar extends Component {
         >
           <NavbarNav left>
             <NavItem active>
-              <button className="link2homeORprofile btn btn-link" onClick={() => {this.props.link === "to profile" ? this.onClick("profile") : this.onClick("home") } }>{this.props.link === "to profile" ? "Profile" : "Home"}</button>
+              <button id="home" className="link2homeORprofile btn btn-link" onClick={ this.onClick }>Home</button>
+              <button id="profile" className="link2homeORprofile btn btn-link" onClick={ this.onClick }>Profile</button>
             </NavItem>
           </NavbarNav>
           <NavbarNav right>

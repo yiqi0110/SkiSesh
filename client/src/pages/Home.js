@@ -20,6 +20,7 @@ class Home extends Component {
         difficulty: "./images/green.png",
         clicked: false,
         makeSesh: false,
+        seshQuery: false,
         jumboSink: null,
         resorts: [],
         makeOrFind: "",
@@ -43,21 +44,12 @@ class Home extends Component {
 
     handleClick = (e) => {
         const btnID = e.target.id;
-        console.log(btnID)
-        // if (this.state.startDate === null || this.state.endDate === null) {
-        //     return;
-        // }
         if (btnID === "makeSesh") {
-            // POST here
-            // this.handleDelay();
-            // this.setState({ jumboSink: "jumboSink 2s ease-out", makeOrFind: "make" });
             this.setState({ makeSesh: true, makeOrFind: "make" });
         } else if (btnID === "findSesh") {
-            // GET here
-            // this.handleDelay();
-            // this.setState({ makeSesh: true, jumboSink: "jumboSink 2s ease-out", makeOrFind: "find" });
             this.setState({ makeSesh: true, makeOrFind: "find" });
             // console.log(this.state.startDate._d);  // brings back the first date
+
         } else if (btnID === "post-sesh") {
             if ((this.state.startDate === null || this.state.endDate === null) || (this.state.resort === "")) {
                 return;
@@ -71,7 +63,7 @@ class Home extends Component {
             }
             this.handleFindSesh();
             this.handleDelay();
-            this.setState({ jumboSink: "jumboSink 2s ease-out" });
+            this.setState({ jumboSink: "jumboSink 2s ease-out", seshQuery: true });
         }
         else {
             return console.log("no button is clicked");
@@ -137,9 +129,9 @@ class Home extends Component {
                 <div className="holder d-flex justify-content-center">
                     {this.state.clicked ?
                         // put left side bar for mod here
-                        <Session sesh={this.state.makeSesh} startDate={this.state.startDate} endDate={this.state.endDate} difficulty={this.state.difficulty} resort={this.state.resort} />
+                        <Session seshQuery={this.state.seshQuery} startDate={this.state.startDate} endDate={this.state.endDate} difficulty={this.state.difficulty} resort={this.state.resort} />
                         :
-                        <HomeJumbotron postSesh={this.handlePostSesh} makeOrFind={this.state.makeOrFind} jumboSink={this.state.jumboSink} handleChange={this.handleChange} handleClick={this.handleClick} resorts={this.state.resorts} makeSesh={this.state.makeSesh}>
+                        <HomeJumbotron seshQuery={this.state.seshQuery} postSesh={this.handlePostSesh} makeOrFind={this.state.makeOrFind} jumboSink={this.state.jumboSink} handleChange={this.handleChange} handleClick={this.handleClick} resorts={this.state.resorts} makeSesh={this.state.makeSesh}>
                             <DateRangePicker
                                 startDate={this.state.startDate} // momentPropTypes.momentObj or null,
                                 startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,

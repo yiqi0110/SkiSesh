@@ -1,12 +1,13 @@
 .jumbotron {
     width: 80%;
     margin: 6% 10%;
-    .sessionsContainer {
-        margin: 5rem 0;
-        animation: sessionsPopup 2s ease-in;
-        .card {
-            margin: 10rem 3rem;
-        }
+}
+
+.sessionsContainer {
+    margin: 5rem 0;
+    animation: sessionsPopup 2s ease-in;
+    .card {
+        margin: 10rem 3rem;
     }
     li {
         list-style: none;

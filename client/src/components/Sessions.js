@@ -10,8 +10,8 @@ function Sessions(props) {
     let endDate = JSON.stringify(props.endDate._d).slice(1, 11);
 
     return (
-        <div className="sessionsContainer d-flex justify-content-center">
-            {props.sesh ?
+        <div className="sessionsContainer">
+            {props.seshQuery ?
                 // map through results
                 <div className="card">
                     <div className="card-header">
@@ -33,7 +33,6 @@ function Sessions(props) {
                                 <span>comment 4</span>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 :
