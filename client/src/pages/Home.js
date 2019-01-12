@@ -18,7 +18,6 @@ class Home extends Component {
         endDateId: "lastDay",
         focusedInput: null,
         difficulty: "./images/green.png",
-        timeOfDay: "All Day",
         clicked: false,
         makeSesh: false,
         jumboSink: null,
@@ -54,6 +53,7 @@ class Home extends Component {
             this.handleDelay();
             this.setState({ makeSesh: true, jumboSink: "jumboSink 2s ease-out" });
             console.log(this.state.startDate._d);  // brings back the first date
+            this.handleFindSesh();
         }
         else {
             return console.log("no button is clicked");
@@ -82,41 +82,27 @@ class Home extends Component {
         })
     }
 
+    handleFindSesh = () => {
+        API.findSesh({
+            startDate: this.state.startDate,
+            endDate: this.state.endDate,
+            resort: this.state.resort
+        }).then(res => {
+            console.log(res);
+        })
+    }
+
+
     handleResorts = () => {
         API.getResorts({}).then(res => {
             const resortData = (res.data);
             let resortArr = [];
-            // console.log(resortData);
-
-            // this.setState({resorts:[...this.state.resorts, resortData[0]]});
-            // console.log(this.state.resorts);
             const entries = Object.entries(resortData[0]);
             entries.pop();
-            // console.log(entries);
             for (const key of entries) {
                 resortArr.push(key[1].SkiArea.name);
             }
-            // resortArr.pop();
-            // console.log(resortArr);
-            // {
-            //     resortArr.map(item =>
-            //         this.setState({
-            //             resorts: <option value={item.name}></option>
-            //         })
-            //     )
-            // }
-            // resortArr.map((element) => {
-            //     // <option value={element}></option>
-            //     console.log(element)
-            // })
             this.setState({ resorts: resortArr})
-
-            // console.log(this.state.resorts)
-            // for(var i = 0; i < (resortArr.length -1); i++){
-            //     // console.log(resortArr[i].name);
-            //     this.setState({resorts:[...this.state.resorts, resortArr[i].name]})
-            // }
-            // console.log(this.state.resorts);
         })
     }
 
@@ -127,7 +113,7 @@ class Home extends Component {
                 <div className="holder d-flex justify-content-center">
                     {this.state.clicked ?
                         // put left side bar for mod here
-                        <Session sesh={this.state.makeSesh} startDate={this.state.startDate} endDate={this.state.endDate} difficulty={this.state.difficulty} timeOfDay={this.state.timeOfDay} />
+                        <Session sesh={this.state.makeSesh} startDate={this.state.startDate} endDate={this.state.endDate} difficulty={this.state.difficulty} resort={this.state.resort} />
                         :
                         <HomeJumbotron jumboSink={this.state.jumboSink} handleChange={this.handleChange} handleClick={this.handleClick} resorts={this.state.resorts}>
                             <DateRangePicker

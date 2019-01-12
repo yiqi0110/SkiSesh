@@ -12,6 +12,9 @@ export default {
   postSesh: function(seshData){
     return axios.post("/api/sesh", seshData);
   },
+  findSesh: function(seshData){
+    return axios.post("/api/sesh/find", seshData);
+  },
   getResorts: function(){
     return axios.get("/api/resorts");
   }
