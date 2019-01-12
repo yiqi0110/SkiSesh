@@ -56,6 +56,8 @@ class Home extends Component {
             // this.setState({ makeSesh: true, jumboSink: "jumboSink 2s ease-out", makeOrFind: "find" });
             this.setState({ makeSesh: true, makeOrFind: "find" });
             // console.log(this.state.startDate._d);  // brings back the first date
+        } else if (btnID === "post-sesh"){
+            this.handlePostSesh();
         }
         else {
             return console.log("no button is clicked");

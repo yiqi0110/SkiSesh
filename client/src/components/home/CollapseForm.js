@@ -66,7 +66,7 @@ function CollapseForm(props) {
                             )}
                         </select>
                     </div>
-                    <input className="btn btn-primary" type="button" value="Make a Sesh" onClick={props.postSesh()}></input>
+                    <input id="post-sesh" className="btn btn-primary" type="button" value="Make a Sesh" onClick={props.handleClick}></input>
                 </form>
             </div>
         )
