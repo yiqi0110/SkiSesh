@@ -58,6 +58,12 @@ class Home extends Component {
             // console.log(this.state.startDate._d);  // brings back the first date
         } else if (btnID === "post-sesh"){
             this.handlePostSesh();
+            this.handleDelay();
+            this.setState({ jumboSink: "jumboSink 2s ease-out" });
+        } else if (btnID === "get-sesh"){
+            this.handleFindSesh();
+            this.handleDelay();
+            this.setState({ jumboSink: "jumboSink 2s ease-out" });
         }
         else {
             return console.log("no button is clicked");
@@ -84,8 +90,6 @@ class Home extends Component {
             resort: this.state.resort,
             skill: this.state.difficulty
         })
-        // this.handleDelay();
-        // this.setState({ jumboSink: "jumboSink 2s ease-out" });
     }
 
     handleFindSesh = () => {
