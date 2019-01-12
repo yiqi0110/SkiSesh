@@ -3,7 +3,8 @@ const seshController = require("../../controllers/seshController");
 
 // Matches with "/api/sesh"
 router.route("/")
-  // .get(userController.findUser)
   .post(seshController.create);
 
+router.route("/find")
+.post(seshController.findSesh);
 module.exports = router;
