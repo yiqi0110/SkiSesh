@@ -12,7 +12,13 @@ var UserSchema = new Schema({
     password: { type: String, required: true },
     age: { type: Date, required: true },
     loginAttempts: { type: Number, required: true, default: 0 },
-    lockUntil: { type: Number }
+    lockUntil: { type: Number },
+    seshes: [
+        {
+        type: Schema.Types.ObjectId,
+        ref:"Sesh"
+        }
+    ]
 });
 
 UserSchema.virtual('isLocked').get(function() {

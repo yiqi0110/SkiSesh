@@ -17,6 +17,9 @@ module.exports = {
     console.log(req.body)
     db.Sesh
       .create(req.body)
+      .then(function(dbSesh){
+        return db.User.findOneAndUpdate({username: req.body.username}, {$push: {seshes: dbSesh._id}}, {new: true});
+      })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.json(err));
   }
