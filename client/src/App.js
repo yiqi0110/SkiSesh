@@ -21,7 +21,7 @@ const styleHome = {
 class App extends Component {
 
   state = {
-    pageON: "login",   // just "home" for now (tesing purposes)
+    pageON: "login", 
   }
 
   componentDidMount() {

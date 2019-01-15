@@ -18,6 +18,12 @@ var UserSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref:"Sesh"
         }
+    ],
+    comments: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Comments"
+        }
     ]
 });
 
