@@ -11,16 +11,30 @@ function Sessions(props) {
         <div className="sessionsContainer">
             {props.seshQuery ?
                 <div>
-                    {props.seshResults.map((data) =>
+                    {(props.seshResults.length === 0) ? (
+                    <div className="card">
+                                <div className="card-header">
+                                    <p>No matches!</p>
+                                </div>
+                                <div className="card-body d-flex justify-content-center">
+                                    <p>Whoops</p>
+                                </div>
+                            </div>
+                    
+                     ) : (
+                    props.seshResults.map((data) =>
+
+
+
                         <div className="card">
                             <div className="card-header">
                                 <p>User: {data.username}</p>
-                                <p>Date Range For Your Sesh: {data.startDate} to {data.endDate}</p>
+                                <p>Date Range For The Sesh: {data.startDate} to {data.endDate}</p>
                                 <p className="card-text">Resort: {data.resort}</p>
-                                <p className="card-text">Skill Level: <img class="skill" src={data.skill}></img></p>
+                                <p className="card-text">Skill Level: <img className="skill" src={data.skill}></img></p>
                             </div>
                             <div className="card-body d-flex justify-content-center">
-                                
+
                                 <div className="dropdown">
                                     <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Comments
@@ -35,8 +49,11 @@ function Sessions(props) {
                                 </div>
                             </div>
                         </div>
-                    )}
+
+                    )
+                     )}
                 </div>
+
                 :
                 <div className="card">
                     <div className="card-header">
