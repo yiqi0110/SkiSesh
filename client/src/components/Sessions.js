@@ -2,20 +2,6 @@ import React from "react";
 import "../style/Jumbotron.scss";
 
 function Sessions(props) {
-    // console.log(props.commentsResults);
-
-    // let result = props.commentsResults;
-    // let arr = [];
-    // // function that formats comment results so react will happily accept them
-    // result.map((data) => (
-    //     let user = data;
-    //     // let comment = data.comment;
-    //     console.log(user)
-    // ))
-
-    // console.log(arr);
-
-    
 
     let startDate = JSON.stringify(props.startDate._d).slice(1, 11);
     let endDate = JSON.stringify(props.endDate._d).slice(1, 11);
@@ -48,17 +34,32 @@ function Sessions(props) {
                                         <p className="card-text">Skill Level: <img className="skill" src={data.skill} alt={data.skill}></img></p>
                                     </div>
                                     <div className="card-body d-flex justify-content-center">
-                                        <ul>
-                                            {
-                                                props.commentsResults.map((data) => (
-                                                    <div className="comment">
-                                                        <p>User: {data.username}</p>
-                                                        <p>Comment: {data.comment}</p>
-                                                        <hr></hr>
-                                                    </div>    
-                                                ))
-                                            }
-                                        </ul>
+                                        <div className="container">
+                                            <div className="row d-flex justify-content-center">
+                                                <ul>
+                                                    {
+                                                        props.commentsResults.map((commentData) => (
+                                                            <div className="comment">
+                                                                <p>User: {commentData.username}</p>
+                                                                <p>Comment: {commentData.comment}</p>
+                                                                <hr></hr>
+                                                            </div>
+                                                        ))
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <div className="row">
+                                                <form>
+                                                    <div className="form-group row">
+                                                        <label forhtml="inputPassword" className="col-sm-3 col-form-label">comment</label>
+                                                        <div className="col-sm-9">
+                                                            <input type="text" className="form-control" id="inputTest" placeholder="test comment" onChange={props.get} />
+                                                            <input id={data._id} type="button" onClick={props.release} value="submit a comment" />
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             )

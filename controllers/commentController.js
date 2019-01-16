@@ -1,14 +1,14 @@
 const db = require("../models");
+var ObjectId = require('mongoose').Types.ObjectId; 
 
 // Defining methods for the booksController
 module.exports = {
   grabComments: function (req, res) {
     console.log("req", req.body)
-    db.Comment
-      .find({
-        username: req.body.username,    //take out later
-        // sesh: req.body.sesh,
-      })
+    db.Sesh
+      .find(
+        {_id: ObjectId(req.body.sesh)}
+      )
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -17,7 +17,9 @@ module.exports = {
     console.log(req.body)
     db.Comment.create(req.body)
       .then(function(dbComment){
-        return db.User.findOneAndUpdate({username: req.body.username}, {$push: {comment: dbComment._id}}, {new: true});
+        let seshOBJ = req.body.sesh;
+        console.log(seshOBJ);
+        return db.Sesh.findOneAndUpdate({_id: ObjectId(req.body.sesh)}, {$push: {comments: dbComment._id}}, {new: true});
       })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.json(err));

@@ -28,7 +28,8 @@ class Home extends Component {
         username: "",
         seshResults: [],
         commentsResults: [],
-        comment: ""
+        comment: "",
+        seshID: "",
     }
 
     componentDidMount() {
@@ -140,11 +141,10 @@ class Home extends Component {
         }
     }
 
-
     grabComments() {
         console.log(this.state.username)
         API.getComments({
-            username: this.state.username
+            sesh: this.state.seshID
         })
         .then(res=>{
             console.log(res);
@@ -154,9 +154,12 @@ class Home extends Component {
     }
 
     releaseComment = (e) => {
+        let seshID = e.target.id;
+        this.setState({seshID: seshID});
         API.postComment({
             username: this.state.username,
             comment: this.state.comment,
+            sesh: seshID,
         })
         .then(res=>console.log(res))
         .catch(err=>console.log(`heres the issue: ${err}`))
