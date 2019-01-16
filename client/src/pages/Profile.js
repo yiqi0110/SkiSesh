@@ -33,27 +33,21 @@ class Profile extends Component {
             this.setState({comment: comment});
         }
     }
-    
-    //ask about the await
-    /*
-    async function (e) {
-        this.setState({comment: "typing..."});
-        let comment = await e.target.value;
-        this.setState({comment: comment});
 
-    }
-    */
 
     grabComments = (e) => {
-
+        API.getComments()
+        .then(res=>console.log(res))
+        .catch(err=>console.log(err))
     }
 
     releaseComment = (e) => {
-        console.log("worked");
         API.postComment({
             username: this.state.username,
             comment: this.state.comment,
         })
+        .then(res=>console.log(res))
+        .catch(err=>console.log(`heres the issue: ${err}`))
         console.log("worked");
     }
 

@@ -22,6 +22,7 @@ export default {
     return axios.get("/api/comment/grab", commentData);
   },
   postComment: function(commentData){
+    console.log(commentData);
     return axios.post("/api/comment/release", commentData);
   }
 };
