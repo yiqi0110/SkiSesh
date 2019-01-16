@@ -18,9 +18,9 @@ function Sessions(props) {
                                 <h5>Looks like there are no exact matches, try broadening your search!</h5>
                             </div>
                             <div className="card-body d-flex justify-content-center">
-                                <button type="button" class="btn btn-primary">Resort Only Search</button>
+                                <button type="button" className="btn btn-primary">Resort Only Search</button>
                                 <br></br>
-                                <button type="button" class="btn btn-primary">Date Only Search</button>
+                                <button type="button" className="btn btn-primary">Date Only Search</button>
                             </div>
                         </div>
 
