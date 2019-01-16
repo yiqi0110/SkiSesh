@@ -26,18 +26,23 @@ class Home extends Component {
         makeOrFind: "",
         resort: "",
         username: "",
-        seshResults: []
+        seshResults: [],
+        commentsResults: [],
+        comment: ""
     }
 
     componentDidMount() {
         this.handleResorts();
         this.getUsername();
+        this.getCommentFromUser();
     }
+    
 
     handleDelay() {
         setTimeout(
             function () {
                 this.setState({ clicked: true });
+                this.grabComments();
             }.bind(this),
             2000
         )
@@ -122,6 +127,40 @@ class Home extends Component {
     getUsername = () => {
         let user = sessionStorage.getItem('username');
         this.setState({username: user});
+        if (this.state.username != "") {
+            this.handleGrabCom();
+
+        }
+    }
+
+    getCommentFromUser = (e) => {
+        if (e){
+            let comment = e.target.value;
+            this.setState({comment: comment});
+        }
+    }
+
+
+    grabComments() {
+        console.log(this.state.username)
+        API.getComments({
+            username: this.state.username
+        })
+        .then(res=>{
+            console.log(res);
+            this.setState({commentsResults: res.data});
+        })
+        .catch(err=>console.log(err))
+    }
+
+    releaseComment = (e) => {
+        API.postComment({
+            username: this.state.username,
+            comment: this.state.comment,
+        })
+        .then(res=>console.log(res))
+        .catch(err=>console.log(`heres the issue: ${err}`))
+        console.log("worked");
     }
 
     render() {
@@ -131,7 +170,7 @@ class Home extends Component {
                 <div className="holder d-flex justify-content-center">
                     {this.state.clicked ?
                         // put left side bar for mod here
-                        <Session seshQuery={this.state.seshQuery} seshResults={this.state.seshResults} startDate={this.state.startDate} endDate={this.state.endDate} difficulty={this.state.difficulty} resort={this.state.resort} />
+                        <Session commentsResults={this.state.commentsResults} handleGrab={this.grabComments} get={this.getCommentFromUser} release={this.releaseComment} comment4post={this.state.comment} seshQuery={this.state.seshQuery} seshResults={this.state.seshResults} startDate={this.state.startDate} endDate={this.state.endDate} difficulty={this.state.difficulty} resort={this.state.resort} />
                         :
                         <HomeJumbotron seshQuery={this.state.seshQuery} postSesh={this.handlePostSesh} makeOrFind={this.state.makeOrFind} jumboSink={this.state.jumboSink} handleChange={this.handleChange} handleClick={this.handleClick} resorts={this.state.resorts} makeSesh={this.state.makeSesh}>
                             <DateRangePicker

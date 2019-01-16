@@ -2,7 +2,20 @@ import React from "react";
 import "../style/Jumbotron.scss";
 
 function Sessions(props) {
-    // console.log(props);
+    // console.log(props.commentsResults);
+
+    // let result = props.commentsResults;
+    // let arr = [];
+    // // function that formats comment results so react will happily accept them
+    // result.map((data) => (
+    //     let user = data;
+    //     // let comment = data.comment;
+    //     console.log(user)
+    // ))
+
+    // console.log(arr);
+
+    
 
     let startDate = JSON.stringify(props.startDate._d).slice(1, 11);
     let endDate = JSON.stringify(props.endDate._d).slice(1, 11);
@@ -25,29 +38,27 @@ function Sessions(props) {
                         </div>
 
                     ) : (
-                        // else map through the data and create cards for each match
+                            // else map through the data and create cards for each match
                             props.seshResults.map((data) =>
                                 <div className="card">
                                     <div className="card-header">
                                         <p>User: {data.username}</p>
                                         <p>Date Range For The Sesh: {data.startDate} to {data.endDate}</p>
                                         <p className="card-text">Resort: {data.resort}</p>
-                                        <p className="card-text">Skill Level: <img className="skill" src={data.skill}></img></p>
+                                        <p className="card-text">Skill Level: <img className="skill" src={data.skill} alt={data.skill}></img></p>
                                     </div>
                                     <div className="card-body d-flex justify-content-center">
-
-                                        <div className="dropdown">
-                                            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Comments
-                            </button>
-                                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                {/* comments regarding the post */}
-                                                <span>comment 1</span>
-                                                <span>comment 2</span>
-                                                <span>comment 3</span>
-                                                <span>comment 4</span>
-                                            </div>
-                                        </div>
+                                        <ul>
+                                            {
+                                                props.commentsResults.map((data) => (
+                                                    <div className="comment">
+                                                        <p>User: {data.username}</p>
+                                                        <p>Comment: {data.comment}</p>
+                                                        <hr></hr>
+                                                    </div>    
+                                                ))
+                                            }
+                                        </ul>
                                     </div>
                                 </div>
                             )
