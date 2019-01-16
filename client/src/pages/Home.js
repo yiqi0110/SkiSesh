@@ -100,6 +100,7 @@ class Home extends Component {
             endDate: this.state.endDate,
             resort: this.state.resort
         }).then(res => {
+            console.log(res)
             this.setState({ seshResults: res.data });
         })
     }

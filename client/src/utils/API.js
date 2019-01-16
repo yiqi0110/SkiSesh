@@ -18,7 +18,7 @@ export default {
   findSeshByDate: function(seshData){
     return axios.post("/api/sesh/findbydate", seshData);
   },
-  findSesh: function(seshData){
+  findSeshByResort: function(seshData){
     return axios.post("/api/sesh/findbyresort", seshData);
   },
   getResorts: function(){
