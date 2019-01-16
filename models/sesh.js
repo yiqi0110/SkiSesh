@@ -11,7 +11,8 @@ const seshSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "Comments"
     }
-  ]
+  ],
+  username: {type: String, required: true}
 });
 
 const Sesh = mongoose.model("Sesh", seshSchema);

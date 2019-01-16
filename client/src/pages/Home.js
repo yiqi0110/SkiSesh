@@ -25,7 +25,8 @@ class Home extends Component {
         resorts: [],
         makeOrFind: "",
         resort: "",
-        username: ""
+        username: "",
+        seshResults: []
     }
 
     componentDidMount() {
@@ -99,7 +100,7 @@ class Home extends Component {
             endDate: this.state.endDate,
             resort: this.state.resort
         }).then(res => {
-            console.log(res);
+            this.setState({ seshResults: res.data });
         })
     }
 
@@ -129,7 +130,7 @@ class Home extends Component {
                 <div className="holder d-flex justify-content-center">
                     {this.state.clicked ?
                         // put left side bar for mod here
-                        <Session seshQuery={this.state.seshQuery} startDate={this.state.startDate} endDate={this.state.endDate} difficulty={this.state.difficulty} resort={this.state.resort} />
+                        <Session seshQuery={this.state.seshQuery} seshResults={this.state.seshResults} startDate={this.state.startDate} endDate={this.state.endDate} difficulty={this.state.difficulty} resort={this.state.resort} />
                         :
                         <HomeJumbotron seshQuery={this.state.seshQuery} postSesh={this.handlePostSesh} makeOrFind={this.state.makeOrFind} jumboSink={this.state.jumboSink} handleChange={this.handleChange} handleClick={this.handleClick} resorts={this.state.resorts} makeSesh={this.state.makeSesh}>
                             <DateRangePicker
