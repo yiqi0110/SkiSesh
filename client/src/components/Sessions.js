@@ -1,10 +1,8 @@
 import React from "react";
 import "../style/Jumbotron.scss";
-import API from "../utils/API";
-
 
 function Sessions(props) {
-    console.log(props);
+    // console.log(props);
 
     let startDate = JSON.stringify(props.startDate._d).slice(1, 11);
     let endDate = JSON.stringify(props.endDate._d).slice(1, 11);
@@ -12,28 +10,48 @@ function Sessions(props) {
     return (
         <div className="sessionsContainer">
             {props.seshQuery ?
-                // map through results
-                <div className="card">
-                    <div className="card-header">
-                        Look At All Those Seshs! <br></br>
-                        Date Range For Your Sesh: {startDate} to {endDate}
-                    </div>
-                    <div className="card-body d-flex justify-content-center">
-                        <h5 className="card-title">Special title treatment</h5>
-                        <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <div className="dropdown">
-                            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Comments
-                            </button>
-                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                {/* comments regarding the post */}
-                                <span>comment 1</span>
-                                <span>comment 2</span>
-                                <span>comment 3</span>
-                                <span>comment 4</span>
+                <div>
+                    {/* If there are no exact date and resort matches */}
+                    {(props.seshResults.length === 0) ? (
+                        <div className="card">
+                            <div className="card-header">
+                                <h5>Looks like there are no exact matches, try broadening your search!</h5>
+                            </div>
+                            <div className="card-body d-flex justify-content-center">
+                                <button type="button" class="btn btn-primary">Resort Only Search</button>
+                                <br></br>
+                                <button type="button" class="btn btn-primary">Date Only Search</button>
                             </div>
                         </div>
-                    </div>
+
+                    ) : (
+                        // else map through the data and create cards for each match
+                            props.seshResults.map((data) =>
+                                <div className="card">
+                                    <div className="card-header">
+                                        <p>User: {data.username}</p>
+                                        <p>Date Range For The Sesh: {data.startDate} to {data.endDate}</p>
+                                        <p className="card-text">Resort: {data.resort}</p>
+                                        <p className="card-text">Skill Level: <img className="skill" src={data.skill}></img></p>
+                                    </div>
+                                    <div className="card-body d-flex justify-content-center">
+
+                                        <div className="dropdown">
+                                            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Comments
+                            </button>
+                                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                {/* comments regarding the post */}
+                                                <span>comment 1</span>
+                                                <span>comment 2</span>
+                                                <span>comment 3</span>
+                                                <span>comment 4</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        )}
                 </div>
                 :
                 <div className="card">
