@@ -1,19 +1,12 @@
 const router = require("express").Router();
-const userController = require("../../controllers/userController");
+const commentController = require("../../controllers/commentController");
+console.log("hello from api")
 
-// Matches with "/api/users"
-router.route("/")
-  // .get(userController.findUser)
-  .post(userController.create);
+// Matches with "/api/comment"
+router.route("/release")
+  .post(commentController.create);
 
-// Matches with "/api/users/:id"
-router
-  .route("/:id")
-  .get(userController.findById)
-  // .put(userController.update)
-  // .delete(userController.remove);
-
-router.route("/login")
-.post(userController.findUser)
+router.route("/grab")
+.post(commentController.grabComments);
 
 module.exports = router;

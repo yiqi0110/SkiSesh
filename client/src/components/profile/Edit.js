@@ -1,7 +1,7 @@
 import React from "react";
 import "../../style/Edit.scss";
 
-function Edit() {
+function Edit(props) {
     return (
             <div className="sidebarContainer">
                 <div className="jumbotron">
@@ -35,12 +35,19 @@ function Edit() {
                         <div className="form-group row">
                             <label forhtml="inputPassword" className="col-sm-3 col-form-label">New Password</label>
                             <div className="col-sm-9">
-                                <input type="password" className="form-control" id="input" placeholder="Password"></input>
+                                <input type="password" className="form-control" id="inputPassword" placeholder="Password"></input>
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <label forhtml="inputPassword" className="col-sm-3 col-form-label">comment</label>
+                            <div className="col-sm-9">
+                                <input type="text" className="form-control" id="inputTest" placeholder="test comment" onChange={props.get} />
+                                <input type="button" onClick={props.release} value="sub"/>
                             </div>
                         </div>
                         </div>
                     </form>
-                    {/* <button type="button" className="btn btn-primary" onClick="handleDropDown">Comments</button> */}
+                    <button type="button" className="btn btn-primary" onClick={props.showComments}>Comments</button>
                 </div>
             </div>
             )
