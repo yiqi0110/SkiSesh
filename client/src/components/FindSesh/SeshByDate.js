@@ -7,7 +7,7 @@ function seshByDate(props) {
             <div className="card">
                 <div className="card-header">
                     <p>User: {data.username}</p>
-                    <p>Date Range For The Sesh: {data.startDate} to {data.endDate}</p>
+                    <p>Date Range For The Sesh: {data.startDate.slice(0, 10)} to {data.endDate.slice(0, 10)}</p>
                     <p className="card-text">Resort: {data.resort}</p>
                     <p className="card-text">Skill Level: <img className="skill" src={data.skill}></img></p>
                 </div>
