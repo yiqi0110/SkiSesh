@@ -53,7 +53,7 @@ function CollapseForm(props) {
                         <label className="input-group-text">Resort You Would Like To Sesh</label>
                         <input type="text" className="input-group-prepend" list="resorts" id="resort-datalist" onChange={props.handleChange}/>
                         <datalist id="resorts">
-                            {props.resorts.map((element) => 
+                            {props.resorts.map((element) =>
                             <option value={element}></option>
                             )}
                         </datalist>
