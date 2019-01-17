@@ -1,7 +1,9 @@
 import React from "react";
+import SeshByResort from "../components/FindSesh/SeshByResort";
+import SeshByDate from "../components/FindSesh/SeshByDate";
 import "../style/Jumbotron.scss";
 
-function Sessions(props) {
+const Sessions = (props) => {
     // console.log(props);
 
     let startDate = JSON.stringify(props.startDate._d).slice(1, 11);
@@ -13,14 +15,14 @@ function Sessions(props) {
                 <div>
                     {/* If there are no exact date and resort matches */}
                     {(props.seshResults.length === 0) ? (
-                        <div className="card">
+                        <div className="card no-match-card">
                             <div className="card-header">
                                 <h5>Looks like there are no exact matches, try broadening your search!</h5>
                             </div>
                             <div className="card-body d-flex justify-content-center">
-                                <button type="button" className="btn btn-primary">Resort Only Search</button>
+                                <button type="button" className="btn btn-primary" id="resort-search" onClick={props.handleClick}>Resort Only Search</button>
                                 <br></br>
-                                <button type="button" className="btn btn-primary">Date Only Search</button>
+                                <button type="button" className="btn btn-primary" id="date-search" onClick={props.handleClick}>Date Only Search</button>
                             </div>
                         </div>
 
@@ -52,6 +54,8 @@ function Sessions(props) {
                                 </div>
                             )
                         )}
+                        {/* Ternary statement for date search or resort search */}
+                        {props.dateSearch ? <SeshByDate seshDateResults={props.seshDateResults}/> : <SeshByResort seshResortResults={props.seshResortResults}/>}
                 </div>
                 :
                 <div className="card">

@@ -26,7 +26,11 @@ class Home extends Component {
         makeOrFind: "",
         resort: "",
         username: "",
-        seshResults: []
+        seshResults: [],
+        seshDateResults: [],
+        seshResortResults: [],
+        resortSearch: null,
+        dateSearch: null
     }
 
     componentDidMount() {
@@ -65,6 +69,16 @@ class Home extends Component {
             this.handleFindSesh();
             this.handleDelay();
             this.setState({ jumboSink: "jumboSink 2s ease-out", seshQuery: true });
+        } else if (btnID === "resort-search") {
+            // this.onClick("resort-search");
+            this.handleFindSeshByResort();
+            this.handleDelay();
+            this.setState({ jumboSink: "jumboSink 2s ease-out", seshQuery: true });
+        } else if (btnID === "date-search") {
+            // this.onClick("date-search");
+            this.handleFindSeshByDate();
+            this.handleDelay();
+            this.setState({ jumboSink: "jumboSink 2s ease-out", seshQuery: true });
         }
         else {
             return console.log("no button is clicked");
@@ -100,8 +114,32 @@ class Home extends Component {
             endDate: this.state.endDate,
             resort: this.state.resort
         }).then(res => {
-            console.log(res)
             this.setState({ seshResults: res.data });
+        })
+    }
+
+    handleFindSeshByDate = () => {
+        API.findSeshByDate({
+            startDate: this.state.startDate,
+            endDate: this.state.endDate
+        }).then(res => {
+            this.setState({
+                seshDateResults: res.data,
+                dateSearch: true,
+                resortSearch: false
+            });
+        })
+    }
+
+    handleFindSeshByResort = () => {
+        API.findSeshByResort({
+            resort: this.state.resort
+        }).then(res => {
+            this.setState({
+                seshResortResults: res.data,
+                dateSearch: false,
+                resortSearch: true
+            });
         })
     }
 
@@ -121,7 +159,11 @@ class Home extends Component {
 
     getUsername = () => {
         let user = sessionStorage.getItem('username');
-        this.setState({username: user});
+        this.setState({ username: user });
+    }
+
+    onClick(e) {
+        this.props.toPage(e);
     }
 
     render() {
@@ -131,7 +173,7 @@ class Home extends Component {
                 <div className="holder d-flex justify-content-center">
                     {this.state.clicked ?
                         // put left side bar for mod here
-                        <Session seshQuery={this.state.seshQuery} seshResults={this.state.seshResults} startDate={this.state.startDate} endDate={this.state.endDate} difficulty={this.state.difficulty} resort={this.state.resort} />
+                        <Session handleClick={this.handleClick} seshQuery={this.state.seshQuery} seshResults={this.state.seshResults} seshDateResults={this.state.seshDateResults} seshResortResults={this.state.seshResortResults} startDate={this.state.startDate} endDate={this.state.endDate} difficulty={this.state.difficulty} resort={this.state.resort} dateSearch={this.state.dateSearch} resortSearch={this.state.resortSearch}/>
                         :
                         <HomeJumbotron seshQuery={this.state.seshQuery} postSesh={this.handlePostSesh} makeOrFind={this.state.makeOrFind} jumboSink={this.state.jumboSink} handleChange={this.handleChange} handleClick={this.handleClick} resorts={this.state.resorts} makeSesh={this.state.makeSesh}>
                             <DateRangePicker
