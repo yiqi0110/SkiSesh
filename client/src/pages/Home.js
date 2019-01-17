@@ -108,12 +108,9 @@ class Home extends Component {
 
     handleResorts = () => {
         API.getResorts({}).then(res => {
-            const resortData = (res.data);
             let resortArr = [];
-            const entries = Object.entries(resortData[0]);
-            entries.pop();
-            for (const key of entries) {
-                resortArr.push(key[1].SkiArea.name);
+            for (var i = 0; i < res.data.length; i++){
+                resortArr.push(res.data[i].SkiArea.name)
             }
             this.setState({ resorts: resortArr })
         })
