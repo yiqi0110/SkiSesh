@@ -21,6 +21,9 @@ export default {
   findSeshByResort: function(seshData){
     return axios.post("/api/sesh/findbyresort", seshData);
   },
+  findSeshForProfile: function(seshData){
+    return axios.post("/api/sesh/findSeshForProfile", seshData)
+  },
   getResorts: function(){
     return axios.get("/api/resorts");
   },

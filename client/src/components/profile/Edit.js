@@ -5,49 +5,49 @@ function Edit(props) {
     return (
             <div className="sidebarContainer">
                 <div className="jumbotron">
-                    <h1 className="display-4">This is you, you and all your seshes!</h1> 
-                    <form>
-                        <div className="container">
-                        <div className="form-group row">
-                            <label forhtml="staticEmail" className="col-sm-3 col-form-label">Current Username</label>
-                            <div className="col-sm-9">
-                                <input type="text" readOnly className="form-control-plaintext textAlign" id="staticUsername" value="current"></input>
+                    <h1 className="display-4">Don't worry, we got all your seshes right here!</h1> 
+                    {
+                        props.seshResults.map((data, index) => (
+                            <div className="card">
+                            <div className="card-header" key={index}>
+                                <p>User: {data.username}</p>
+                                <p>Date Range For The Sesh: {data.startDate.slice(0, 10)} to {data.endDate.slice(0, 10)}</p>
+                                <p className="card-text">Resort: {data.resort}</p>
+                                <p className="card-text">Skill Level: <img className="skill" src={data.skill} alt={data.skill} width="30" height="30"></img></p>
+                            </div>
+                            <div className="card-body d-flex justify-content-center">
+                                <div className="container">
+                                    <div className="row d-flex justify-content-center">
+                                        <ul>
+                                            {
+                                                data.comments.map((comment, i) => ( 
+                                                    <div className="comment" key={i}>
+                                                        <p>User: {comment.username}</p>
+                                                        <p>Comment: {comment.comment}</p>
+                                                        <hr></hr>
+                                                    </div>
+                                                ))
+                                            }
+                                        </ul>
+                                    </div>
+                                    <div className="row">
+                                        <form>
+                                            <div className="form-group">
+                                                <div className="form-row">
+                                                    <div className="col-7">
+                                                        <textarea className="form-control" type="text" placeholder="Comment" onChange={props.get} />
+                                                    </div>
+                                                    <div className="col">
+                                                        <input id={data._id} className="btn btn-primary" type="button" onClick={props.release} value="Comment" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className="form-group row">
-                            <label forhtml="inputPassword" className="col-sm-3 col-form-label">New Username</label>
-                            <div className="col-sm-9">
-                                <input type="text" className="form-control" id="inputUsername" placeholder="New Username"></input>
-                            </div>
-                        </div>
-                        <div className="form-group row">
-                            <label forhtml="staticEmail" className="col-sm-3 col-form-label">Current Email</label>
-                            <div className="col-sm-9">
-                                <input type="text" readOnly className="form-control-plaintext textAlign" id="staticEmail" value="current"></input>
-                            </div>
-                        </div>
-                        <div className="form-group row">
-                            <label forhtml="inputPassword" className="col-sm-3 col-form-label">New Email</label>
-                            <div className="col-sm-9">
-                                <input type="text" className="form-control" id="inputEmail" placeholder="New Email"></input>
-                            </div>
-                        </div>
-                        <div className="form-group row">
-                            <label forhtml="inputPassword" className="col-sm-3 col-form-label">New Password</label>
-                            <div className="col-sm-9">
-                                <input type="password" className="form-control" id="inputPassword" placeholder="Password"></input>
-                            </div>
-                        </div>
-                        <div className="form-group row">
-                            <label forhtml="inputPassword" className="col-sm-3 col-form-label">comment</label>
-                            <div className="col-sm-9">
-                                <input type="text" className="form-control" id="inputTest" placeholder="test comment" onChange={props.get} />
-                                <input type="button" onClick={props.release} value="sub"/>
-                            </div>
-                        </div>
-                        </div>
-                    </form>
-                    <button type="button" className="btn btn-primary" onClick={props.showComments}>Comments</button>
+                    ))}
                 </div>
             </div>
             )

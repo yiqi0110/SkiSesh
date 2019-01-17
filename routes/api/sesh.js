@@ -14,4 +14,7 @@ router.route("/findbydate")
 router.route("/findbyresort")
 .post(seshController.findSeshByResort);
 
+router.route("/findSeshForProfile")
+.post(seshController.findSeshForProfile);
+
 module.exports = router;
