@@ -11,8 +11,8 @@ import 'react-dates/initialize';
 
 const styleHome = {
   backgroundImage: `url(${Background})`,
-
   width: '100%',
+  backgroundAttachment: 'fixed',
   backgroundRepeat: 'no-repeat',
   backgroundSize: 'cover',
   backgroundPosition: 'center',

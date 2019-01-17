@@ -6,6 +6,7 @@ import "../style/Jumbotron.scss";
 const Sessions = (props) => {
     // console.log(props);
 
+
     let startDate = JSON.stringify(props.startDate._d).slice(1, 11);
     let endDate = JSON.stringify(props.endDate._d).slice(1, 11);
 
@@ -27,27 +28,40 @@ const Sessions = (props) => {
                         </div>
 
                     ) : (
-                        // else map through the data and create cards for each match
+                            // else map through the data and create cards for each match
                             props.seshResults.map((data) =>
                                 <div className="card">
                                     <div className="card-header">
                                         <p>User: {data.username}</p>
                                         <p>Date Range For The Sesh: {data.startDate.slice(0, 10)} to {data.endDate.slice(0, 10)}</p>
                                         <p className="card-text">Resort: {data.resort}</p>
-                                        <p className="card-text">Skill Level: <img className="skill" src={data.skill}></img></p>
+                                        <p className="card-text">Skill Level: <img className="skill" src={data.skill} alt={data.skill}></img></p>
                                     </div>
                                     <div className="card-body d-flex justify-content-center">
-
-                                        <div className="dropdown">
-                                            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Comments
-                            </button>
-                                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                {/* comments regarding the post */}
-                                                <span>comment 1</span>
-                                                <span>comment 2</span>
-                                                <span>comment 3</span>
-                                                <span>comment 4</span>
+                                        <div className="container">
+                                            <div className="row d-flex justify-content-center">
+                                                <ul>
+                                                    {
+                                                        props.commentsResults.map((commentData) => (
+                                                            <div className="comment">
+                                                                <p>User: {commentData.username}</p>
+                                                                <p>Comment: {commentData.comment}</p>
+                                                                <hr></hr>
+                                                            </div>
+                                                        ))
+                                                    }
+                                                </ul>
+                                            </div>
+                                            <div className="row">
+                                                <form>
+                                                    <div className="form-group row">
+                                                        <label forhtml="inputPassword" className="col-sm-3 col-form-label">comment</label>
+                                                        <div className="col-sm-9">
+                                                            <input type="text" className="form-control" id="inputTest" placeholder="test comment" onChange={props.get} />
+                                                            <input id={data._id} type="button" onClick={props.release} value="submit a comment" />
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
