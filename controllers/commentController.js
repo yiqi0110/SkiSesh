@@ -5,10 +5,8 @@ var ObjectId = require('mongoose').Types.ObjectId;
 module.exports = {
   grabComments: function (req, res) {
     console.log("req", req.body)
-    db.Sesh
-      .find(
-        {_id: ObjectId(req.body.sesh)}
-      )
+    db.Comment
+      .find({})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -17,9 +15,8 @@ module.exports = {
     console.log(req.body)
     db.Comment.create(req.body)
       .then(function(dbComment){
-        let seshOBJ = req.body.sesh;
-        console.log(seshOBJ);
-        return db.Sesh.findOneAndUpdate({_id: ObjectId(req.body.sesh)}, {$push: {comments: dbComment._id}}, {new: true});
+        console.log(dbComment);
+        return db.Sesh.findOneAndUpdate({_id: ObjectId(req.body.sesh)}, {$push: {comments: {comment: dbComment.comment, username: dbComment.username}}}, {new: true});
       })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.json(err));

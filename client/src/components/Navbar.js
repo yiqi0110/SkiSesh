@@ -7,15 +7,18 @@ class NavBar extends Component {
 
   state = {
     isOpen: false,
-    history: "",
   };
 
-  
   toggleCollapse = this.setState({ isOpen: !this.state.isOpen });
   
   onClick = (e) => {
     e.preventDefault();
     this.props.toPage(e.target.id);
+    if (e.target.id === "home") {
+      if (this.props.page !== "profile") {
+        this.props.backToHome();
+      }
+    }
   }
 
   render () {

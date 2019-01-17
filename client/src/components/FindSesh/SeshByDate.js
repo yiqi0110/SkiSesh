@@ -12,17 +12,33 @@ function seshByDate(props) {
                     <p className="card-text">Skill Level: <img className="skill" src={data.skill}></img></p>
                 </div>
                 <div className="card-body d-flex justify-content-center">
-
-                    <div className="dropdown">
-                        <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Comments
-                            </button>
-                        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            {/* comments regarding the post */}
-                            <span>comment 1</span>
-                            <span>comment 2</span>
-                            <span>comment 3</span>
-                            <span>comment 4</span>
+                    <div className="container">
+                        <div className="row d-flex justify-content-center">
+                            <ul>
+                                {
+                                    data.comments.map((comment) => ( 
+                                        <div className="comment">
+                                            <p>User: {comment.username}</p>
+                                            <p>Comment: {comment.comment}</p>
+                                            <hr></hr>
+                                        </div>
+                                    ))
+                                }
+                            </ul>
+                        </div>
+                        <div className="row">
+                            <form>
+                                <div className="form-group">
+                                    <div className="form-row">
+                                        <div className="col-7">
+                                            <textarea class="form-control" type="text" placeholder="Comment" onChange={props.get} />
+                                        </div>
+                                        <div className="col">
+                                            <input id={data._id} className="btn btn-primary" type="button" onClick={props.release} value="Comment" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

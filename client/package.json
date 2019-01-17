@@ -12,6 +12,7 @@
     "react-dates": "^18.3.1",
     "react-dom": "^16.6.3",
     "react-modal": "^3.7.1",
+    "react-pure-lifecycle": "^3.0.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",

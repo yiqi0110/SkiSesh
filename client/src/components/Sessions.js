@@ -1,7 +1,14 @@
 import React from "react";
 import SeshByResort from "../components/FindSesh/SeshByResort";
 import SeshByDate from "../components/FindSesh/SeshByDate";
+import lifecycle from 'react-pure-lifecycle';
 import "../style/Jumbotron.scss";
+
+const methods = {
+    componentDidMount(props) {
+        console.log(props);
+    }
+}
 
 const Sessions = (props) => {
     // console.log(props);
@@ -42,10 +49,10 @@ const Sessions = (props) => {
                                             <div className="row d-flex justify-content-center">
                                                 <ul>
                                                     {
-                                                        props.commentsResults.map((commentData) => (
+                                                        data.comments.map((comment) => ( 
                                                             <div className="comment">
-                                                                <p>User: {commentData.username}</p>
-                                                                <p>Comment: {commentData.comment}</p>
+                                                                <p>User: {comment.username}</p>
+                                                                <p>Comment: {comment.comment}</p>
                                                                 <hr></hr>
                                                             </div>
                                                         ))
@@ -54,11 +61,14 @@ const Sessions = (props) => {
                                             </div>
                                             <div className="row">
                                                 <form>
-                                                    <div className="form-group row">
-                                                        <label forhtml="inputPassword" className="col-sm-3 col-form-label">comment</label>
-                                                        <div className="col-sm-9">
-                                                            <input type="text" className="form-control" id="inputTest" placeholder="test comment" onChange={props.get} />
-                                                            <input id={data._id} type="button" onClick={props.release} value="submit a comment" />
+                                                    <div className="form-group">
+                                                        <div className="form-row">
+                                                            <div className="col-7">
+                                                                <textarea class="form-control" type="text" placeholder="Comment" onChange={props.get} />
+                                                            </div>
+                                                            <div className="col">
+                                                                <input id={data._id} className="btn btn-primary" type="button" onClick={props.release} value="Comment" />
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -101,4 +111,4 @@ const Sessions = (props) => {
     )
 }
 
-export default Sessions;
+export default lifecycle(methods)(Sessions);

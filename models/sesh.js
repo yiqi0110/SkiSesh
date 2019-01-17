@@ -8,8 +8,8 @@ const seshSchema = new Schema({
   skill: { type: String, required: true },
   comments: [
     {
-      type: Schema.Types.ObjectId,
-      ref: "Comments"
+      comment: { type: String, required: true },
+      username: { type: String, required: true }
     }
   ],
   username: {type: String, required: true}
