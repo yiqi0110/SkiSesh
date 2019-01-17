@@ -30,6 +30,10 @@ class Home extends Component {
         commentsResults: [],
         comment: "",
         seshID: "",
+        seshDateResults: [],
+        seshResortResults: [],
+        resortSearch: null,
+        dateSearch: null
     }
 
     componentDidMount() {
@@ -71,6 +75,16 @@ class Home extends Component {
             this.handleFindSesh();
             this.handleDelay();
             this.setState({ jumboSink: "jumboSink 2s ease-out", seshQuery: true });
+        } else if (btnID === "resort-search") {
+            // this.onClick("resort-search");
+            this.handleFindSeshByResort();
+            this.handleDelay();
+            this.setState({ jumboSink: "jumboSink 2s ease-out", seshQuery: true });
+        } else if (btnID === "date-search") {
+            // this.onClick("date-search");
+            this.handleFindSeshByDate();
+            this.handleDelay();
+            this.setState({ jumboSink: "jumboSink 2s ease-out", seshQuery: true });
         }
         else {
             return console.log("no button is clicked");
@@ -78,8 +92,8 @@ class Home extends Component {
     }
 
     handleChange = (e) => {
-        console.log(typeof e.target.id);
-        console.log(e.target.value);
+        // console.log(typeof e.target.id);
+        // console.log(e.target.value);
         if (e.target.id === "resort-datalist") {
             this.setState({ resort: e.target.value })
         } else if (e.target.id === "experienceLevel") {
@@ -106,20 +120,43 @@ class Home extends Component {
             endDate: this.state.endDate,
             resort: this.state.resort
         }).then(res => {
-            console.log(res)
             this.setState({ seshResults: res.data });
+        })
+    }
+
+    handleFindSeshByDate = () => {
+        API.findSeshByDate({
+            startDate: this.state.startDate,
+            endDate: this.state.endDate
+        }).then(res => {
+            this.setState({
+                seshDateResults: res.data,
+                dateSearch: true,
+                resortSearch: false
+            });
+        })
+    }
+
+    handleFindSeshByResort = () => {
+        API.findSeshByResort({
+            resort: this.state.resort
+        }).then(res => {
+            this.setState({
+                seshResortResults: res.data,
+                dateSearch: false,
+                resortSearch: true
+            });
         })
     }
 
 
     handleResorts = () => {
         API.getResorts({}).then(res => {
-            const resortData = (res.data);
+            console.log(res.data)
             let resortArr = [];
-            const entries = Object.entries(resortData[0]);
-            entries.pop();
-            for (const key of entries) {
-                resortArr.push(key[1].SkiArea.name);
+            for (var i = 0; i < res.data.length; i++){
+                resortArr.push(res.data[i].SkiArea.name + " (" + res.data[i].Region[0].name + ")")
+                // console.log(res.data[i].Region[0].name + "----" + i)
             }
             this.setState({ resorts: resortArr })
         })
@@ -164,6 +201,11 @@ class Home extends Component {
         .then(res=>console.log(res))
         .catch(err=>console.log(`heres the issue: ${err}`))
         console.log("worked");
+        this.setState({ username: user });
+    }
+
+    onClick(e) {
+        this.props.toPage(e);
     }
 
     render() {
@@ -173,7 +215,10 @@ class Home extends Component {
                 <div className="holder d-flex justify-content-center">
                     {this.state.clicked ?
                         // put left side bar for mod here
-                        <Session commentsResults={this.state.commentsResults} handleGrab={this.grabComments} get={this.getCommentFromUser} release={this.releaseComment} comment4post={this.state.comment} seshQuery={this.state.seshQuery} seshResults={this.state.seshResults} startDate={this.state.startDate} endDate={this.state.endDate} difficulty={this.state.difficulty} resort={this.state.resort} />
+          // trevors
+                        <Session handleClick={this.handleClick} commentsResults={this.state.commentsResults} handleGrab={this.grabComments} get={this.getCommentFromUser} release={this.releaseComment} comment4post={this.state.comment} seshQuery={this.state.seshQuery} seshResults={this.state.seshResults} startDate={this.state.startDate} endDate={this.state.endDate} difficulty={this.state.difficulty} resort={this.state.resort} />
+          // matts
+                        <Session handleClick={this.handleClick} seshQuery={this.state.seshQuery} seshResults={this.state.seshResults} seshDateResults={this.state.seshDateResults} seshResortResults={this.state.seshResortResults} startDate={this.state.startDate} endDate={this.state.endDate} difficulty={this.state.difficulty} resort={this.state.resort} dateSearch={this.state.dateSearch} resortSearch={this.state.resortSearch}/>
                         :
                         <HomeJumbotron seshQuery={this.state.seshQuery} postSesh={this.handlePostSesh} makeOrFind={this.state.makeOrFind} jumboSink={this.state.jumboSink} handleChange={this.handleChange} handleClick={this.handleClick} resorts={this.state.resorts} makeSesh={this.state.makeSesh}>
                             <DateRangePicker
