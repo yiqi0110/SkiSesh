@@ -86,8 +86,8 @@ class Home extends Component {
     }
 
     handleChange = (e) => {
-        console.log(typeof e.target.id);
-        console.log(e.target.value);
+        // console.log(typeof e.target.id);
+        // console.log(e.target.value);
         if (e.target.id === "resort-datalist") {
             this.setState({ resort: e.target.value })
         } else if (e.target.id === "experienceLevel") {
@@ -146,9 +146,11 @@ class Home extends Component {
 
     handleResorts = () => {
         API.getResorts({}).then(res => {
+            console.log(res.data)
             let resortArr = [];
             for (var i = 0; i < res.data.length; i++){
-                resortArr.push(res.data[i].SkiArea.name)
+                resortArr.push(res.data[i].SkiArea.name + " (" + res.data[i].Region[0].name + ")")
+                // console.log(res.data[i].Region[0].name + "----" + i)
             }
             this.setState({ resorts: resortArr })
         })
