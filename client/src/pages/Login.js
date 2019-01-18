@@ -175,7 +175,7 @@ class Login extends Component {
                                 Register
                         </FormBtn>
                         </form>
-                        <button onClick={this.handleBackToLogin} className="login-btn btn-link" href="">Cancel</button>
+                        <button onClick={this.handleBackToLogin} className="login-btn login-cancel btn-link" href="">Cancel</button>
                     </Modal>
                 </div>
             )
