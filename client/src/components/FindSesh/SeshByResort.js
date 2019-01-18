@@ -1,40 +1,31 @@
 import React from "react";
 import "../../style/Jumbotron.scss";
+import CollapsePage from "../DropDown";
 
 const seshByResort = (props) => {
     return (
-        props.seshResortResults.map((data) =>
+        props.seshResortResults.map((data, index) =>
             <div className="card">
-                <div className="card-header">
+                <div className="card-header" key={index}>
                     <p>User: {data.username}</p>
                     <p>Date Range For The Sesh: {data.startDate.slice(0, 10)} to {data.endDate.slice(0, 10)}</p>
                     <p className="card-text">Resort: {data.resort}</p>
-                    <p className="card-text">Skill Level: <img className="skill" src={data.skill}></img></p>
+                    <p className="card-text">Skill Level: <img className="skill" src={data.skill} alt={data.skill} width="30" height="30"></img></p>
                 </div>
                 <div className="card-body d-flex justify-content-center">
                     <div className="container">
                         <div className="row d-flex justify-content-center">
-                            <ul>
-                                {
-                                    data.comments.map((comment) => ( 
-                                        <div className="comment">
-                                            <p>User: {comment.username}</p>
-                                            <p>Comment: {comment.comment}</p>
-                                            <hr></hr>
-                                        </div>
-                                    ))
-                                }
-                            </ul>
+                            <CollapsePage comments={data.comments} />
                         </div>
-                        <div className="row">
+                        <div className="row d-flex justify-content-center">
                             <form>
                                 <div className="form-group">
-                                    <div className="form-row">
-                                        <div className="col-7">
-                                            <textarea class="form-control" type="text" placeholder="Comment" onChange={props.get} />
-                                        </div>
+                                    <div className="form-row d-felx justify-content-center">
                                         <div className="col">
-                                            <input id={data._id} className="btn btn-primary" type="button" onClick={props.release} value="Comment" />
+                                            <textarea rows="3" cols="80" className="form-control" type="text" placeholder="Comment" value={props.userInput} onChange={props.get} />
+                                            <div className="col justify-self-end">
+                                                <input id={data._id} className="btn btn-primary" type="submit" onClick={props.release} value="Comment" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

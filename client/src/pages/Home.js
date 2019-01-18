@@ -196,17 +196,20 @@ class Home extends Component {
     }       // refered to handleGrab in sessions.js
 
     releaseComment = (e) => {
+        e.preventDefault();
         let seshID = e.target.id;
-        this.setState({ seshID: seshID });
+        this.setState({seshID: seshID});
         API.postComment({
             username: this.state.username,
             comment: this.state.comment,
             sesh: seshID,
         })
-            .then(res => console.log(res))
-            .catch(err => console.log(`heres the issue: ${err}`))
-        // console.log("worked");
-        // this.setState({ username: user });
+        .then(res=>{
+            console.log(res);
+            this.handleFindSesh();
+            this.setState({comment: ""});
+        })
+        .catch(err=>console.log(`heres the issue: ${err}`))
     }
 
     onClick(e) {
@@ -217,10 +220,11 @@ class Home extends Component {
         this.setState({
             clicked: false,
             makeSesh: false,
+            comment: "",
             jumboSink: null,
-            seshResults: [],
             startDate: null,
-            endDate: null
+            endDate: null,
+            focusedInput: null,
         });
     }
 
@@ -231,6 +235,7 @@ class Home extends Component {
                 <div className="holder d-flex justify-content-center">
                     {this.state.clicked ?
                         <Session
+                            userInput={this.state.comment}
                             handleClick={this.handleClick}
                             commentsResults={this.state.commentsResults}
                             handleGrab={this.grabComments}
