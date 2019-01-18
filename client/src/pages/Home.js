@@ -215,27 +215,12 @@ class Home extends Component {
 
     backToHome = (e) => {
         this.setState({
-            startDate: null,
-            startDateId: "firstday",
-            endDate: null,
-            endDateId: "lastDay",
-            focusedInput: null,
-            difficulty: "./images/green.png",
             clicked: false,
             makeSesh: false,
-            seshQuery: false,
             jumboSink: null,
-            makeOrFind: "",
-            resort: "",
             seshResults: [],
-            commentsResults: [],
-            seshID: "",
-            seshDateResults: [],
-            seshResortResults: [],
-            resortSearch: null,
-            dateSearch: null,
-            noResortMatch: false,
-            unfilledForm: false
+            startDate: null,
+            endDate: null
         });
     }
 
