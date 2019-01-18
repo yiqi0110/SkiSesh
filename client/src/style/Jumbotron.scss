@@ -1,6 +1,11 @@
 .jumbotron {
     width: 80%;
     margin: 6% 10%;
+    #makeSesh,
+    #findSesh {
+        margin-right: 1em;
+        margin-left: 1em;
+    }
 }
 
 .sessionsContainer {
@@ -15,6 +20,11 @@
     .skill{
         height: 30px;
         width: 30px;
+    }
+    #resort-search,
+    #date-search {
+        margin-right: 1em;
+        margin-left: 1em;
     }
 }
 
