@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { MDBBtn, MDBCollapse } from "mdbreact";
 
+
 class CollapsePage extends Component {
 state = {
   collapseID: ""
@@ -31,7 +32,7 @@ render() {
             (
                 this.props.comments.map((comment, i) => ( 
                     <div>
-                    User: {comment.username} | Comment({i}): {comment.comment}
+                    User: {comment.username} | Comment: {comment.comment}
                     <br></br>
                     </div>
                     

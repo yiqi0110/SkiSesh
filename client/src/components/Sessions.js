@@ -2,6 +2,7 @@ import React from "react";
 import SeshByResort from "../components/FindSesh/SeshByResort";
 import SeshByDate from "../components/FindSesh/SeshByDate";
 import lifecycle from 'react-pure-lifecycle';
+import CollapsePage from "./DropDown";
 import "../style/Jumbotron.scss";
 
 const methods = {
@@ -35,48 +36,38 @@ const Sessions = (props) => {
                         </div>
 
                     ) : (
-                            // else map through the data and create cards for each match
-                            props.seshResults.map((data) =>
+                        <div>{
+                            props.seshResults.map((data, index) => (
                                 <div className="card">
-                                    <div className="card-header">
-                                        <p>User: {data.username}</p>
-                                        <p>Date Range For The Sesh: {data.startDate.slice(0, 10)} to {data.endDate.slice(0, 10)}</p>
-                                        <p className="card-text">Resort: {data.resort}</p>
-                                        <p className="card-text">Skill Level: <img className="skill" src={data.skill} alt={data.skill}></img></p>
-                                    </div>
-                                    <div className="card-body d-flex justify-content-center">
-                                        <div className="container">
-                                            <div className="row d-flex justify-content-center">
-                                                <ul>
-                                                    {
-                                                        data.comments.map((comment) => ( 
-                                                            <div className="comment">
-                                                                <p>User: {comment.username}</p>
-                                                                <p>Comment: {comment.comment}</p>
-                                                                <hr></hr>
-                                                            </div>
-                                                        ))
-                                                    }
-                                                </ul>
-                                            </div>
-                                            <div className="row d-flex justify-content-center">
-                                                <form>
-                                                    <div className="form-group">
-                                                        <div className="form-row">
-                                                            <div className="col-7">
-                                                                <textarea class="form-control" type="text" placeholder="Comment" onChange={props.get} />
-                                                            </div>
-                                                            <div className="col">
-                                                                <input id={data._id} className="btn btn-primary" type="button" onClick={props.release} value="Comment" />
+                                <div className="card-header" key={index}>
+                                    <p>User: {data.username}</p>
+                                    <p>Date Range For The Sesh: {data.startDate.slice(0, 10)} to {data.endDate.slice(0, 10)}</p>
+                                    <p className="card-text">Resort: {data.resort}</p>
+                                    <p className="card-text">Skill Level: <img className="skill" src={data.skill} alt={data.skill} width="30" height="30"></img></p>
+                                </div>
+                                <div className="card-body d-flex justify-content-center">
+                                    <div className="container">
+                                        <div className="row d-flex justify-content-center">
+                                            <CollapsePage comments={data.comments}/>
+                                        </div>
+                                        <div className="row d-flex justify-content-center">
+                                            <form>
+                                                <div className="form-group">
+                                                    <div className="form-row d-felx justify-content-center">
+                                                        <div className="col">
+                                                            <textarea rows="3" cols="80" className="form-control" type="text" placeholder="Comment" value={props.userInput} onChange={props.get} />
+                                                            <div className="col justify-self-end">
+                                                                <input id={data._id} className="btn btn-primary" type="submit" onClick={props.release} value="Comment" />
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                            )
+                            </div>
+                        ))}</div>
                         )}
                         {/* Ternary statement for date search or resort search */}
                         {props.dateSearch ? <SeshByDate seshDateResults={props.seshDateResults}/> : <SeshByResort seshResortResults={props.seshResortResults}/>}
@@ -93,18 +84,7 @@ const Sessions = (props) => {
                             <li>Resort: {props.resort}</li>
                             <li>Skill Preference: <img src={props.difficulty} alt={props.difficulty} width="35rem" /></li>
                         </div>
-                        <div className="dropdown">
-                            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Comments
-                            </button>
-                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                {/* comments regarding the post */}
-                                <span>comment 1</span><br></br>
-                                <span>comment 2</span><br></br>
-                                <span>comment 3</span><br></br>
-                                <span>comment 4</span><br></br>
-                            </div>
-                        </div>
+                        <span>Check your profile to view any comments</span>
                     </div>
                 </div>}
         </div>
