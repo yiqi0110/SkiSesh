@@ -7,12 +7,14 @@ class Login extends Component {
     state = {
         username: "",
         password: "",
+        confirmPassword: "",
         age: "",
         skill: "",
         display: "none",
         header: "Login",
         loginError: "",
         usernameTaken: "",
+        passwordNoMatch: false
     };
 
     componentDidMount = () => {
@@ -33,29 +35,35 @@ class Login extends Component {
 
     handleFormSignUp = event => {
         event.preventDefault();
-        if (this.state.username && this.state.password && this.state.age) {
-            API.saveUser({
-                username: this.state.username,
-                password: this.state.password,
-                age: this.state.age
-            })
-                .then(res => {
-                    console.log(res)
-                    if (res.data.errmsg) {
-                        this.setState({
-                            usernameTaken: true,
-                            username: "",
-                            password: "",
-                            age: ""
-                        });
-                    } else {
-                        this.setState({
-                            header: "Login",
-                            username: "",
-                            password: ""
-                        });
-                    }
-                });
+        if (this.state.username && this.state.password && this.state.confirmPassword && this.state.age) {
+            if (this.state.password !== this.state.confirmPassword) {
+                this.setState({ passwordNoMatch: true })
+            } else {
+                API.saveUser({
+                    username: this.state.username,
+                    password: this.state.password,
+                    age: this.state.age
+                })
+                    .then(res => {
+                        console.log(res)
+                        if (res.data.errmsg) {
+                            this.setState({
+                                usernameTaken: true,
+                                username: "",
+                                password: "",
+                                confirmPassword: "",
+                                age: "",
+                                passwordNoMatch: true
+                            });
+                        } else {
+                            this.setState({
+                                header: "Login",
+                                username: "",
+                                password: ""
+                            });
+                        }
+                    });
+            }
         }
     };
 
@@ -75,7 +83,7 @@ class Login extends Component {
                         this.setState({ loginError: true });
                     } else {
                         sessionStorage.setItem("username", res.data.username);
-                        this.setState({ display: "none"});
+                        this.setState({ display: "none" });
                         this.props.toHome("home");
                     }
                 })
@@ -100,7 +108,10 @@ class Login extends Component {
             header: "Sign Up!",
             username: "",
             password: "",
-            loginError: ""
+            confirmPassword: "",
+            loginError: "",
+            usernameTaken: "",
+            passwordNoMatch: false
         });
     }
 
@@ -109,8 +120,10 @@ class Login extends Component {
             header: "Login",
             username: "",
             password: "",
+            confirmPassword: "",
             age: "",
-            usernameTaken: ""
+            usernameTaken: "",
+            passwordNoMatch: false
         });
     }
 
@@ -122,6 +135,9 @@ class Login extends Component {
                         header={this.state.header}>
                         {this.state.usernameTaken ? <div className="alert alert-danger" role="alert">
                             Username is already taken.
+                        </div> : ""}
+                        {this.state.passwordNoMatch ? <div className="alert alert-danger" role="alert">
+                            Passwords do not match.
                         </div> : ""}
                         <form>
                             <Input
@@ -138,6 +154,13 @@ class Login extends Component {
                                 placeholder="Password (required)"
                             />
                             <Input
+                                value={this.state.confirmPassword}
+                                onChange={this.handleInputChange}
+                                type="password"
+                                name="confirmPassword"
+                                placeholder="Confirm Password (required)"
+                            />
+                            <Input
                                 value={this.state.age}
                                 onChange={this.handleInputChange}
                                 type="date"
@@ -145,7 +168,7 @@ class Login extends Component {
                                 placeholder="Age"
                             />
                             <FormBtn
-                                disabled={!(this.state.username && this.state.password && this.state.age)}
+                                disabled={!(this.state.username && this.state.password && this.state.confirmPassword && this.state.age)}
                                 onClick={this.handleFormSignUp}
                             >
                                 Register
