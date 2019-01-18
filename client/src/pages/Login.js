@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import { Input, FormBtn } from "../components/Form";
 import Modal from "../components/Modal";
+import "../style/Login.scss"
 
 class Login extends Component {
     state = {
@@ -174,7 +175,7 @@ class Login extends Component {
                                 Register
                         </FormBtn>
                         </form>
-                        <button onClick={this.handleBackToLogin} className="btn-link" href="">Cancel</button>
+                        <button onClick={this.handleBackToLogin} className="login-btn login-cancel btn-link" href="">Cancel</button>
                     </Modal>
                 </div>
             )
@@ -208,7 +209,7 @@ class Login extends Component {
                         </FormBtn>
                         </form>
                         <p>Not a Member?
-                        <button onClick={this.handleSignUp} className="btn-link" href="">Sign Up!</button>
+                        <button onClick={this.handleSignUp} className="login-btn btn-link" href="">Sign Up!</button>
                         </p>
                     </Modal>
                 </div>
