@@ -59,7 +59,7 @@ const Sessions = (props) => {
                                                     }
                                                 </ul>
                                             </div>
-                                            <div className="row">
+                                            <div className="row d-flex justify-content-center">
                                                 <form>
                                                     <div className="form-group">
                                                         <div className="form-row">

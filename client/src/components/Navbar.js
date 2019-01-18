@@ -1,15 +1,15 @@
 
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand, NavbarNav, NavItem, NavbarToggler, Collapse, FormInline } from "mdbreact";
+import { Navbar, NavbarBrand, NavbarNav, NavItem, NavLink, NavbarToggler, Collapse } from "mdbreact";
 import "../style/Navbar.scss"
 
 class NavBar extends Component {
 
   state = {
-    isOpen: false,
+    isOpen: false
   };
 
-  toggleCollapse = this.setState({ isOpen: !this.state.isOpen });
+  toggleCollapse = () => {this.setState({ isOpen: !this.state.isOpen })};
   
   onClick = (e) => {
     e.preventDefault();
@@ -41,16 +41,11 @@ class NavBar extends Component {
           navbar
         >
           <NavbarNav left>
-            <NavItem active>
-              <button id="home" className="link2homeORprofile btn btn-link" onClick={ this.onClick }>Home</button>
-              <button id="profile" className="link2homeORprofile btn btn-link" onClick={ this.onClick }>Profile</button>
+            <NavItem >
+              <NavLink to="#!" id="home" className="link2homeORprofile btn btn-link" onClick={ this.onClick }>Home</NavLink>
             </NavItem>
-          </NavbarNav>
-          <NavbarNav right>
-            <NavItem>
-              <FormInline waves>
-                    {/* <button className="btn btn-dark" onClick={() => { signOut() }}>Sign Out</button> */}
-              </FormInline>
+            <NavItem >
+              <NavLink to="#!" id="profile" className="link2homeORprofile btn btn-link" onClick={ this.onClick }>Profile</NavLink>
             </NavItem>
           </NavbarNav>
         </Collapse>

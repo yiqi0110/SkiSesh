@@ -10,7 +10,8 @@ class Profile extends Component {
     state = {
         seshResults: [],
         username: null,
-        comment: null,
+        comment: "",
+        loading: true
     }
 
     componentDidMount() {
@@ -23,6 +24,7 @@ class Profile extends Component {
         setTimeout(
             function () {
                 this.handleFindSesh();
+                this.setState({loading: false})
             }.bind(this),
             3000
         )
@@ -49,6 +51,7 @@ class Profile extends Component {
     }
 
     releaseComment = (e) => {
+        e.preventDefault();
         let seshID = e.target.id;
         this.setState({seshID: seshID});
         API.postComment({
@@ -56,7 +59,11 @@ class Profile extends Component {
             comment: this.state.comment,
             sesh: seshID,
         })
-        .then(res=>console.log(res))
+        .then(res=>{
+            console.log(res);
+            this.handleFindSesh();
+            this.setState({comment: ""});
+        })
         .catch(err=>console.log(`heres the issue: ${err}`))
     }
 
@@ -64,7 +71,7 @@ class Profile extends Component {
         return (
             <div className="profileHolder">
             <Navbar page="profile" toPage={this.props.toPage}/>
-            <Edit seshQuery={true} get={this.getCommentFromUser} release={this.releaseComment} seshResults={this.state.seshResults} />
+            <Edit loading={this.state.loading} userInput={this.state.comment} seshQuery={true} get={this.getCommentFromUser} release={this.releaseComment} seshResults={this.state.seshResults} />
             <Footer />
             </div>
         )
