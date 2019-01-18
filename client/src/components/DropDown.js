@@ -14,12 +14,15 @@ toggleCollapse = (collapseID) => {
 
 render() {
   return (
-    <>
+    <div className="container">
+    <div className="row d-flex justify-content-center">
       <MDBBtn color="primary" onClick={()=> this.toggleCollapse("basicCollapse")}
         style={{ marginBottom: "1rem" }}
         >
         View Comments ({this.props.comments.length})
       </MDBBtn>
+      </div>
+      <div className="row d-flex justify-content-center">
       <MDBCollapse id="basicCollapse" isOpen={this.state.collapseID}>
       <p>
         {
@@ -27,9 +30,11 @@ render() {
             ?
             (
                 this.props.comments.map((comment, i) => ( 
-                    <div className="row">
+                    <div>
                     User: {comment.username} | Comment({i}): {comment.comment}
+                    <br></br>
                     </div>
+                    
                 
                 ))
             )
@@ -40,7 +45,9 @@ render() {
         }
       </p>
       </MDBCollapse>
-    </>
+
+    </div>
+    </div>
 
     );
   }

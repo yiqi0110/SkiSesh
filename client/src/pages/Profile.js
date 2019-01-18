@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Edit from "../components/profile/Edit";
 import API from "../utils/API";
+import "../style/comment.scss";
 
 class Profile extends Component {
 

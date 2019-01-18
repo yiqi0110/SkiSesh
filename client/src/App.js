@@ -9,15 +9,6 @@ import Footer from "./components/Footer";
 import 'react-dates/lib/css/_datepicker.css';
 import 'react-dates/initialize';
 
-const styleHome = {
-  backgroundImage: `url(${Background})`,
-  width: 'fill',
-  backgroundAttachment: 'fixed',
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-}
-
 class App extends Component {
 
   state = {
@@ -41,7 +32,7 @@ class App extends Component {
 
     if (this.state.pageON === "login") {
       return (
-        <div className="App"  style={styleHome}>
+        <div className="App" >
         <Login toHome={this.onChangeOfPage.bind(this)}/>
         <Footer />
       </div>
@@ -49,14 +40,14 @@ class App extends Component {
 
     } else if (this.state.pageON === "home") {
       return (
-        <div className="App"  style={styleHome}>
+        <div className="App">
           <Home toPage={this.onChangeOfPage.bind(this)}/>
         </div>
       );
 
     } else if (this.state.pageON === "profile") {
       return (
-        <div className="App"  style={styleHome}>
+        <div className="App">
           <Profile toPage={this.onChangeOfPage.bind(this)}/>
         </div>
       );
