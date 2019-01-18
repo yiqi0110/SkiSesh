@@ -39,7 +39,7 @@ const difficulty = [
 function CollapseForm(props) {
 
     if (props.makeOrFind === "make") {
-        
+
         return (
             <div className="collapseContainer d-flex justify-content-center">
                 <form>
@@ -51,10 +51,10 @@ function CollapseForm(props) {
                     </div>
                     <div className="input-group mb-3">
                         <label className="input-group-text">Resort You Would Like To Sesh</label>
-                        <input type="text" className="input-group-prepend" list="resorts" id="resort-datalist" onChange={props.handleChange}/>
+                        <input type="text" className="input-group-prepend" list="resorts" id="resort-datalist" onChange={props.handleChange} />
                         <datalist id="resorts">
                             {props.resorts.map((element) =>
-                            <option value={element}></option>
+                                <option value={element}></option>
                             )}
                         </datalist>
                     </div>
@@ -66,6 +66,12 @@ function CollapseForm(props) {
                             )}
                         </select>
                     </div>
+                    {props.noResortMatch ? <div className="alert alert-danger" role="alert">
+                        Please choose a valid resort.
+                        </div> : ""}
+                    {props.unfilledForm ? <div className="alert alert-danger" role="alert">
+                        Please fill out all form fields.
+                        </div> : ""}
                     <input id="post-sesh" className="btn btn-primary" type="button" value="Make a Sesh" onClick={props.handleClick}></input>
                 </form>
             </div>
@@ -83,20 +89,26 @@ function CollapseForm(props) {
                     </div>
                     <div className="input-group mb-3">
                         <label className="input-group-text">Resort You Would Like To Sesh</label>
-                        <input type="text" className="input-group-prepend" list="resorts" id="resort-datalist" onChange={props.handleChange}/>
+                        <input type="text" className="input-group-prepend" list="resorts" id="resort-datalist" onChange={props.handleChange} />
                         <datalist id="resorts">
-                            {props.resorts.map((element) => 
-                            <option value={element}></option>
+                            {props.resorts.map((element) =>
+                                <option value={element}></option>
                             )}
                         </datalist>
                     </div>
+                    {props.noResortMatch ? <div className="alert alert-danger" role="alert">
+                        Please choose a valid resort.
+                        </div> : ""}
+                    {props.unfilledForm ? <div className="alert alert-danger" role="alert">
+                        Please fill out all form fields.
+                        </div> : ""}
                     <input id="get-sesh" className="btn btn-primary" type="button" value="Find a Sesh" onClick={props.handleClick}></input>
                 </form>
             </div>
         )
 
     }
-    
+
 }
 
 export default CollapseForm;
