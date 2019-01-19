@@ -9,13 +9,14 @@ class Login extends Component {
         username: "",
         password: "",
         confirmPassword: "",
-        age: "",
+        email: "",
         skill: "",
         display: "none",
         header: "Login",
         loginError: "",
         usernameTaken: "",
-        passwordNoMatch: false
+        passwordNoMatch: false,
+        emailError: false
     };
 
     componentDidMount = () => {
@@ -36,25 +37,38 @@ class Login extends Component {
 
     handleFormSignUp = event => {
         event.preventDefault();
-        if (this.state.username && this.state.password && this.state.confirmPassword && this.state.age) {
+        if (this.state.username && this.state.password && this.state.confirmPassword && this.state.email) {
             if (this.state.password !== this.state.confirmPassword) {
-                this.setState({ passwordNoMatch: true })
+                this.setState({ passwordNoMatch: true, emailError: false, usernameTaken: false })
             } else {
                 API.saveUser({
                     username: this.state.username,
                     password: this.state.password,
-                    age: this.state.age
+                    email: this.state.email
                 })
                     .then(res => {
                         console.log(res)
+                        //if username is taken
                         if (res.data.errmsg) {
                             this.setState({
                                 usernameTaken: true,
                                 username: "",
                                 password: "",
                                 confirmPassword: "",
-                                age: "",
-                                passwordNoMatch: true
+                                email: "",
+                                emailError: false,
+                                passwordNoMatch: false
+                            });
+                            //if email doesn't match regex in user model
+                        } else if(res.data.errors){
+                            this.setState({
+                                emailError: true,
+                                username: "",
+                                password: "",
+                                confirmPassword: "",
+                                email: "",
+                                usernameTaken: false,
+                                passwordNoMatch: false
                             });
                         } else {
                             this.setState({
@@ -110,9 +124,11 @@ class Login extends Component {
             username: "",
             password: "",
             confirmPassword: "",
+            email: "",
             loginError: "",
             usernameTaken: "",
-            passwordNoMatch: false
+            passwordNoMatch: false,
+            emailError: false
         });
     }
 
@@ -122,7 +138,7 @@ class Login extends Component {
             username: "",
             password: "",
             confirmPassword: "",
-            age: "",
+            email: "",
             usernameTaken: "",
             passwordNoMatch: false
         });
@@ -139,6 +155,9 @@ class Login extends Component {
                         </div> : ""}
                         {this.state.passwordNoMatch ? <div className="alert alert-danger" role="alert">
                             Passwords do not match.
+                        </div> : ""}
+                        {this.state.emailError ? <div className="alert alert-danger" role="alert">
+                            Please enter a valid email address.
                         </div> : ""}
                         <form>
                             <Input
@@ -162,14 +181,14 @@ class Login extends Component {
                                 placeholder="Confirm Password (required)"
                             />
                             <Input
-                                value={this.state.age}
+                                value={this.state.email}
                                 onChange={this.handleInputChange}
-                                type="date"
-                                name="age"
-                                placeholder="Age"
+                                type="email"
+                                name="email"
+                                placeholder="email@example.com"
                             />
                             <FormBtn
-                                disabled={!(this.state.username && this.state.password && this.state.confirmPassword && this.state.age)}
+                                disabled={!(this.state.username && this.state.password && this.state.confirmPassword && this.state.email)}
                                 onClick={this.handleFormSignUp}
                             >
                                 Register
