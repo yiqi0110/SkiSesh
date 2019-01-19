@@ -9,8 +9,8 @@ class NavBar extends Component {
     isOpen: false
   };
 
-  toggleCollapse = () => {this.setState({ isOpen: !this.state.isOpen })};
-  
+  toggleCollapse = () => { this.setState({ isOpen: !this.state.isOpen }) };
+
   onClick = (e) => {
     e.preventDefault();
     this.props.toPage(e.target.id);
@@ -21,38 +21,45 @@ class NavBar extends Component {
     }
   }
 
-  render () {
-    return (
-    <div className="navContainer">
+  logout = (e) => {
+    e.preventDefault();
+    sessionStorage.removeItem("username");
+    window.location.reload();
+  }
 
-      <Navbar color="default-color" dark expand="md">
-        <NavbarBrand>
-          <img id="spin" src="./images/doubleBlack.png" alt="SeshLogo" width="30px" height="30px" />
-          <strong className="white-text">
-            The Sesh
+  render() {
+    return (
+      <div className="navContainer">
+
+        <Navbar color="default-color" dark expand="md">
+          <NavbarBrand>
+            <img id="spin" src="./images/doubleBlack.png" alt="SeshLogo" width="30px" height="30px" />
+            <strong className="white-text">
+              The Sesh
           </strong>
-        </NavbarBrand>
-        <NavbarToggler
+          </NavbarBrand>
+          <NavbarToggler
             onClick={this.toggleCollapse}
-        />
-        <Collapse
-          id="navbarCollapse3"
-          isOpen={this.state.isOpen}
-          navbar
-        >
-          <NavbarNav left>
-            <NavItem >
-              <NavLink to="#!" id="home" className="link2homeORprofile btn btn-link" onClick={ this.onClick }>Home</NavLink>
-            </NavItem>
-            <NavItem >
-              <NavLink to="#!" id="profile" className="link2homeORprofile btn btn-link" onClick={ this.onClick }>Profile</NavLink>
-            </NavItem>
-          </NavbarNav>
-        </Collapse>
-      </Navbar>
-    </div>
-  );
-}
+          />
+          <Collapse
+            id="navbarCollapse3"
+            isOpen={this.state.isOpen}
+            navbar
+          >
+            <NavbarNav left>
+              <NavItem >
+                <NavLink to="#!" id="home" className="link2homeORprofile btn btn-link" onClick={this.onClick}>Home</NavLink>
+              </NavItem>
+              <NavItem >
+                <NavLink to="#!" id="profile" className="link2homeORprofile btn btn-link" onClick={this.onClick}>Profile</NavLink>
+              </NavItem>
+            </NavbarNav>
+          </Collapse>
+          <NavLink to="#!" id="logout" className="btn btn-link" onClick={this.logout}>Logout</NavLink>
+        </Navbar>
+      </div>
+    );
+  }
 }
 
 export default NavBar;
