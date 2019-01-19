@@ -7,10 +7,24 @@ var mongoose = require('mongoose'),
     MAX_LOGIN_ATTEMPTS = 5,
     LOCK_TIME = 2 * 60 * 60 * 1000;
 
+var validateEmail = function(email) {
+    var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return re.test(email)
+};
+
 var UserSchema = new Schema({
-    username: { type: String, required: true, index: { unique: true } },
-    password: { type: String, required: true },
-    age: { type: Date, required: true },
+    username: { type: String, required: true, trim: true, index: { unique: true } },
+    password: { type: String, required: true, trim: true },
+    // age: { type: Date, required: true },
+    email: {
+        type: String,
+        trim: true,
+        lowercase: true,
+        unique: true,
+        required: true,
+        validate: [validateEmail, 'Please fill a valid email address'],
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
+    },
     loginAttempts: { type: Number, required: true, default: 0 },
     lockUntil: { type: Number },
     seshes: [
