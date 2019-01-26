@@ -21,4 +21,4 @@ The Sesh is an application that allows users to create a profile, post when and 
 * **Trevor Li** - [yiqi0110](https://github.com/yiqi0110)
 
 ## Screenshot
-![Home Page Screenshot](client/public/images/thesesh-screenshot.png)
+![Home Page Screenshot](client/public/images/thesesh-screenshot.png) 
