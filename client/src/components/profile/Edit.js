@@ -14,7 +14,7 @@ function Edit(props) {
                         :
                         <div>{
                             props.seshResults.map((data, index) => (
-                                <div className="card">
+                                <div className="card sesh-card">
                                 <div className="card-header" key={index}>
                                     <p>User: {data.username}</p>
                                     <p>Date Range For The Sesh: {data.startDate.slice(0, 10)} to {data.endDate.slice(0, 10)}</p>
