@@ -32,6 +32,7 @@ module.exports = {
   findSeshForProfile: function (req, res) {
     db.Sesh
     .find({username: req.body.username})
+    .sort({startDate: -1})
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
   },
